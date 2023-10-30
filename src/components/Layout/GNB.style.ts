@@ -1,4 +1,5 @@
 import { styled } from 'styled-components';
+import { Colors } from '../../styles/colors';
 
 export const main = styled.nav`
   display: flex;
@@ -11,7 +12,12 @@ export const main = styled.nav`
 
   padding: 116px 0 76px;
 
-  background-color: #f2f7ff;
+  background-color: ${Colors.Tertiary};
+`;
+
+export const logo = styled.h3`
+  font-size: 28px;
+  font-weight: bold;
 `;
 
 export const list = styled.ul`
@@ -21,4 +27,24 @@ export const list = styled.ul`
   gap: 26px;
 `;
 
-export const item = styled.li``;
+export const item = styled.li`
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  gap: 21px;
+
+  width: 210px;
+  height: 47px;
+  padding: 0 20px 0 10px;
+  border-radius: 100px;
+
+  font-size: 16px;
+  font-weight: bold;
+
+  cursor: pointer;
+
+  &.selected {
+    color: ${Colors.White};
+    background-color: ${Colors.Secondary};
+  }
+`;

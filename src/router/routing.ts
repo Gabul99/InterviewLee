@@ -1,9 +1,11 @@
-import { useNavigate } from 'react-router-dom';
+import { useLocation, useNavigate } from 'react-router-dom';
 import { useMemo } from 'react';
 import { stringify } from 'qs';
 
 export function useRouter() {
   const navigate = useNavigate();
+  const location = useLocation();
+
   return useMemo(() => {
     return {
       back(steps = 1) {
@@ -15,8 +17,9 @@ export function useRouter() {
           search: search ? stringify(search, { indices: false }) : undefined,
         });
       },
+      pathname: location.pathname,
     };
   }, [navigate]);
 }
 
-export type RoutePath = '/intro' | '/' | '/board' | '/report' | '/campus';
+export type RoutePath = '/' | '/home' | '/board' | '/report' | '/campus';

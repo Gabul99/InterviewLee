@@ -1,17 +1,25 @@
-import { useRouter } from '../../router/routing';
+import { useRouter, RoutePath } from '../../router/routing';
+import { capitalizeFirstLetter } from '../../utils/format';
 import * as S from './GNB.style';
 
 const GNB = () => {
-  const router = useRouter();
+  const { pathname, push } = useRouter();
+
+  const paths = ['/home', '/board', '/report', '/campus'];
 
   return (
     <S.main>
-      <h3>InterviewLee</h3>
+      <S.logo>InterviewLee</S.logo>
       <S.list>
-        <li onClick={() => router.push('/')}>Home</li>
-        <li onClick={() => router.push('/board')}>Question Board</li>
-        <li onClick={() => router.push('/report')}>Reports</li>
-        <li onClick={() => router.push('/campus')}>Campus Spirit</li>
+        {paths.map((path) => (
+          <S.item
+            key={path}
+            className={path === pathname ? 'selected' : ''}
+            onClick={() => push(path as RoutePath)}
+          >
+            {capitalizeFirstLetter(path.split('/')[1])}
+          </S.item>
+        ))}
       </S.list>
     </S.main>
   );

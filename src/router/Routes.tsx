@@ -9,9 +9,9 @@ import Report from '../pages/report';
 export const Routes = () => {
   return (
     <ReactRouterRoutes>
-      <Route path="/intro" element={<Intro />} />
+      <Route path="/" element={<Intro />} />
       <Route element={<Layout />}>
-        <Route path="/" element={<Home />} />
+        <Route path="/home" element={<Home />} />
         <Route path="/board" element={<Board />} />
         <Route path="/campus" element={<Campus />} />
         <Route path="/report" element={<Report />} />
