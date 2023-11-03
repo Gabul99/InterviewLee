@@ -3,5 +3,6 @@ export const Colors = {
   Secondary: '#0B409C',
   Tertiary: '#F2F7FF',
   Highlight: '#FFE867',
+  Highlight_30: '#FFE86726',
   White: '#FFFFFF',
 } as const;
