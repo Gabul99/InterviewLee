@@ -9,20 +9,9 @@ export const Container = styled.div<{ focused: boolean }>`
   padding: 16px;
 
   background: ${(props) => (props.focused ? Colors.Tertiary : Colors.White)};
+  border-bottom: 1px solid rgba(0, 0, 0, 0.08);
 
   cursor: pointer;
-`;
-
-export const QuestionWrapper = styled.div`
-  display: flex;
-  flex-direction: row;
-  gap: 20px;
-`;
-
-export const QuestionContentWrapper = styled.div`
-  display: flex;
-  flex-direction: column;
-  gap: 16px;
 `;
 
 export const AnswerWrapper = styled.div`

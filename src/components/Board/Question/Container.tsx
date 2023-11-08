@@ -2,6 +2,9 @@ import { useState } from 'react';
 import { Question } from '../../../models/Board/Question';
 
 import * as S from './Container.style';
+import QuestionWrapper from './QuestionPreview';
+import RecentAnswerList from './RecentAnswerList';
+import AnswerInput from './AnswerInput';
 
 interface Props {
   question: Question;
@@ -13,42 +16,24 @@ const QuestionContainer: React.FC<Props> = (props) => {
 
   const [focused, setFocused] = useState(false);
 
-  const onClick = () => {
+  const onClick = (e: React.MouseEvent<HTMLDivElement, MouseEvent>) => {
+    e.stopPropagation();
     setFocused((prev) => !prev);
   };
 
   return (
-    <S.Container focused={focused} onClick={onClick}>
-      <QuestionWrapper question={question} />
+    <S.Container focused={focused}>
+      <QuestionWrapper question={question} onClick={onClick} />
+      {focused && (
+        <>
+          <AnswerInput />
+          {question.answers.length ? (
+            <RecentAnswerList answers={question.answers} />
+          ) : null}
+        </>
+      )}
     </S.Container>
   );
 };
 
 export default QuestionContainer;
-
-interface QuestionWrapperProps {
-  question: Question;
-}
-
-const QuestionWrapper: React.FC<QuestionWrapperProps> = ({
-  question,
-}: QuestionWrapperProps) => {
-  const { description, answers, tags } = question;
-
-  return (
-    <S.QuestionWrapper>
-      <h2>Q:</h2>
-      <S.QuestionContentWrapper>
-        {tags.map((tag) => (
-          <div key={tag.name}>태그: ${tag.name}</div>
-        ))}
-        <p>{description}</p>
-        <span>
-          {answers.length
-            ? `${answers.length.toLocaleString()} people have responded`
-            : ''}
-        </span>
-      </S.QuestionContentWrapper>
-    </S.QuestionWrapper>
-  );
-};
