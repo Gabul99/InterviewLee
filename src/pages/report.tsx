@@ -1,6 +1,7 @@
 import { useState } from 'react';
 import ListItem from '../components/Report/ListItem';
 import * as S from './report.style';
+import ReportDetail from '../components/Report/ReportDetail';
 
 const mockList = [
   {
@@ -9,8 +10,34 @@ const mockList = [
   },
 ];
 
+export interface AIReport {
+  id: number;
+  question: string;
+  answer: string;
+  clarity: number;
+  uniqueness: number;
+  depth: number;
+  follow_up: number;
+}
+
+const AIReportList: AIReport[] = [
+  {
+    id: 1,
+    question: 'Why do you apply this company?',
+    answer: 'Gain money, what else.',
+    clarity: 70,
+    uniqueness: 50,
+    depth: 90,
+    follow_up: 45,
+  },
+];
+
 const Report: React.FC = () => {
   const [selectedId, setSelectedId] = useState<number | null>(null);
+  const selectedReport =
+    selectedId === null
+      ? null
+      : AIReportList.filter((i) => i.id === selectedId)[0] ?? null;
 
   return (
     <S.Container>
@@ -28,13 +55,14 @@ const Report: React.FC = () => {
           ))}
         </S.LeftListArea>
         <S.Contents>
-          {selectedId === null && (
+          {!selectedReport && (
             <div className="empty">
               Check the report about your answer
               <br />
               by selecting in left list!
             </div>
           )}
+          {selectedReport && <ReportDetail review={selectedReport} />}
         </S.Contents>
       </S.Body>
     </S.Container>

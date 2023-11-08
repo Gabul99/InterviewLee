@@ -5,4 +5,5 @@ export const Colors = {
   Highlight: '#FFE867',
   Highlight_30: '#FFE86726',
   White: '#FFFFFF',
+  Green: '#42CB3F',
 } as const;

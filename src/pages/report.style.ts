@@ -28,6 +28,7 @@ export const Header = styled.header`
 export const Body = styled.body`
   width: 100%;
   flex-grow: 1;
+  min-height: 0;
   flex-basis: 0;
   display: flex;
   flex-direction: row;
@@ -57,6 +58,7 @@ export const Contents = styled.div`
   flex-direction: column;
   padding: 32px;
   gap: 16px;
+  overflow-y: auto;
 
   background-color: ${Colors.Tertiary};
 
