@@ -59,4 +59,17 @@ export const Contents = styled.div`
   gap: 16px;
 
   background-color: ${Colors.Tertiary};
+
+  .empty {
+    width: 100%;
+    height: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-weight: 500;
+    font-size: 24px;
+    color: rgba(0, 0, 0, 0.6);
+    text-align: center;
+    line-height: 32px;
+  }
 `;
