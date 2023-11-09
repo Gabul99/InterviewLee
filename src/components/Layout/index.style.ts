@@ -14,5 +14,5 @@ export const layout = styled.div`
   flex-direction: row;
 
   width: 100%;
-  height: calc(100% - 98px);
+  height: 100%;
 `;

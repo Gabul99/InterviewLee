@@ -10,7 +10,6 @@ const Layout: React.FC = () => {
         <GNB />
         <Outlet />
       </S.layout>
-      <Footer />
     </S.main>
   );
 };
