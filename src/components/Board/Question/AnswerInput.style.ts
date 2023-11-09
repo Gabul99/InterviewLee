@@ -13,19 +13,33 @@ export const Container = styled.div`
     font-weight: bold;
     line-height: normal;
   }
+`;
 
-  textarea {
-    all: unset;
+export const Textarea = styled.textarea<{ confirmed: boolean }>`
+  all: unset;
 
-    display: flex;
-    height: 120px;
-    padding: 8px;
-    flex-direction: column;
-    align-items: flex-start;
-    gap: 16px;
-    flex: 1 0 0;
+  display: flex;
+  height: 120px;
+  padding: 8px;
+  flex-direction: column;
+  align-items: flex-start;
+  gap: 16px;
+  flex: 1 0 0;
 
-    border-radius: 8px;
-    background: rgba(0, 0, 0, 0.04);
+  border-radius: 8px;
+  background: rgba(0, 0, 0, 0.04);
+
+  &::placeholder {
+    color: rgba(0, 0, 0, 0.4);
+
+    font-family: Outfit;
+    font-size: 16px;
+    font-style: normal;
+    font-weight: 400;
+    line-height: normal;
+  }
+
+  &:disabled {
+    background: transparent;
   }
 `;

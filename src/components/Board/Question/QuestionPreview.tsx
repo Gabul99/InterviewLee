@@ -1,12 +1,15 @@
 import { Question } from '../../../models/Board/Question';
+import PrimaryButton from '../../Common/Button/PrimaryButton';
 import * as S from './QuestionPreview.style';
 
 interface QuestionWrapperProps {
+  focused: boolean;
   question: Question;
   onClick: (e: React.MouseEvent<HTMLDivElement, MouseEvent>) => void;
 }
 
 const QuestionWrapper: React.FC<QuestionWrapperProps> = ({
+  focused,
   question,
   onClick,
 }: QuestionWrapperProps) => {
@@ -26,6 +29,15 @@ const QuestionWrapper: React.FC<QuestionWrapperProps> = ({
             : ''}
         </span>
       </S.QuestionContentWrapper>
+      {!focused && (
+        <PrimaryButton
+          style={{ alignSelf: 'flex-end' }}
+          label="Answer!"
+          onClick={() => {
+            console.log('TODO');
+          }}
+        />
+      )}
     </S.QuestionWrapper>
   );
 };

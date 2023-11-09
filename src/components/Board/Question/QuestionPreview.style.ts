@@ -19,6 +19,7 @@ export const QuestionContentWrapper = styled.div`
   display: flex;
   flex-direction: column;
   gap: 16px;
+  flex-grow: 1;
 
   p {
     color: #000;
