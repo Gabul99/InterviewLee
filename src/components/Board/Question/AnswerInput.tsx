@@ -1,8 +1,18 @@
 import { useState } from 'react';
 import PrimaryButton from '../../Common/Button/PrimaryButton';
 import * as S from './AnswerInput.style';
+import { useQuestionContext } from '../../../context/Question';
+import { Question } from '../../../models/Board/Question';
 
-const AnswerInput: React.FC = () => {
+interface Props {
+  id: Question['id'];
+}
+
+const AnswerInput: React.FC<Props> = (props) => {
+  const { id } = props;
+
+  const { setSelectedQuestionId } = useQuestionContext();
+
   const [value, setValue] = useState('');
   const [confirmed, setConfirmed] = useState(false);
 
@@ -22,6 +32,8 @@ const AnswerInput: React.FC = () => {
         onClick={() => {
           if (!confirmed) {
             setConfirmed(true);
+          } else {
+            setSelectedQuestionId(id);
           }
         }}
       />

@@ -16,3 +16,13 @@ export const layout = styled.div`
   width: 100%;
   height: 100%;
 `;
+
+export const OutletContainer = styled.div`
+  position: relative;
+
+  display: flex;
+  flex-direction: column;
+
+  width: 100%;
+  height: 100%;
+`;

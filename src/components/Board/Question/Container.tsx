@@ -30,7 +30,7 @@ const QuestionContainer: React.FC<Props> = (props) => {
       />
       {focused && (
         <>
-          <AnswerInput />
+          <AnswerInput id={question.id} />
           {question.answers.length ? (
             <RecentAnswerList answers={question.answers} />
           ) : null}
