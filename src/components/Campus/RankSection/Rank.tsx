@@ -28,10 +28,7 @@ const Rank = () => {
   return (
     <S.Container>
       {isHovered && <CampusPopUp style={popUpStyles} />}
-      <S.RankWrapper
-        onMouseEnter={handleMouseEnter}
-        onMouseLeave={handleMouseLeave}
-      >
+      <S.RankWrapper onMouseEnter={handleMouseEnter} onMouseLeave={handleMouseLeave}>
         <S.RankUnit style={rankStyles}>
           <S.RankNo>
             <h1>1.</h1>
