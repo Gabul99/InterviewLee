@@ -14,5 +14,15 @@ export const layout = styled.div`
   flex-direction: row;
 
   width: 100%;
-  height: calc(100% - 98px);
+  height: 100%;
+`;
+
+export const OutletContainer = styled.div`
+  position: relative;
+
+  display: flex;
+  flex-direction: column;
+
+  width: 100%;
+  height: 100%;
 `;

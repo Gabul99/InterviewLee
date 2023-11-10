@@ -1,6 +1,6 @@
 import { styled } from 'styled-components';
 
-export const QuestionWrapper = styled.div`
+export const Container = styled.div`
   display: flex;
   flex-direction: row;
   gap: 20px;
@@ -19,6 +19,7 @@ export const QuestionContentWrapper = styled.div`
   display: flex;
   flex-direction: column;
   gap: 16px;
+  flex-grow: 1;
 
   p {
     color: #000;

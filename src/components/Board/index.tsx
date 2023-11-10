@@ -1,25 +1,14 @@
-import { mockQuestions } from '../../api/mocks/question.mock';
-import PrimaryButton from '../Common/Button/PrimaryButton';
-import QuestionContainer from './Question/Container';
+import QuestionList from './QuestionList';
 import * as S from './index.style';
+import Feedback from './Feedback';
+import { useQuestionContext } from '../../context/Question';
 
 const Board: React.FC = () => {
+  const { selectedQuestionId } = useQuestionContext();
+
   return (
     <S.Container>
-      <S.TitleWrapper>
-        <h1>Question Board</h1>
-        <PrimaryButton
-          label="Post Question"
-          onClick={() => {
-            console.log('TODO');
-          }}
-        />
-      </S.TitleWrapper>
-      <S.QuestionWrapper>
-        {mockQuestions.map((question) => (
-          <QuestionContainer key={question.id} question={question} />
-        ))}
-      </S.QuestionWrapper>
+      {selectedQuestionId === null ? <QuestionList /> : <Feedback />}
     </S.Container>
   );
 };
