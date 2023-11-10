@@ -64,6 +64,18 @@ export const TotalPointContainer = styled.div`
     font-weight: 700;
     font-size: 24px;
   }
+
+  .avg {
+    font-size: 20px;
+    font-weight: 500;
+
+    span.green {
+      color: ${Colors.Green};
+    }
+    span.yellow {
+      color: #ebd661;
+    }
+  }
 `;
 
 export const DetailArea = styled.div`

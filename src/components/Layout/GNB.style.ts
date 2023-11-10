@@ -11,6 +11,7 @@ export const main = styled.nav`
   height: 100%;
 
   padding: 116px 0 76px;
+  flex-shrink: 0;
 
   background-color: ${Colors.Tertiary};
 `;

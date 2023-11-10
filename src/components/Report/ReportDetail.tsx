@@ -1,4 +1,5 @@
 import { AIReport } from '../../pages/report';
+import RadarChart from './RadarChart';
 import * as S from './ReportDetail.style';
 
 interface Props {
@@ -6,6 +7,8 @@ interface Props {
 }
 
 const ReportDetail: React.FC<Props> = ({ review }: Props) => {
+  const avgValue =
+    (review.clarity + review.depth + review.uniqueness + review.follow_up) / 4;
   return (
     <S.Container>
       <S.QnAContainer>
@@ -19,6 +22,10 @@ const ReportDetail: React.FC<Props> = ({ review }: Props) => {
       <S.PointArea>
         <S.TotalPointContainer>
           <h2 className="title">Total</h2>
+          <p className="avg">
+            Avg. {avgValue} - Top <span className="yellow">40%</span>
+          </p>
+          <RadarChart report={review} />
         </S.TotalPointContainer>
         <S.DetailArea>
           <DetailItem title="Clarity" point={review.clarity} />
