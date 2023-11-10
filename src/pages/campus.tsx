@@ -1,5 +1,13 @@
+import PodiumSection from '../components/Campus';
+
+import * as S from './campus.style';
+
 const Campus: React.FC = () => {
-  return <div>Campus</div>;
+  return (
+    <S.Container>
+      <PodiumSection />
+    </S.Container>
+  );
 };
 
 export default Campus;
