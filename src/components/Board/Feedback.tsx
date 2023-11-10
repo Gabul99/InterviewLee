@@ -6,9 +6,7 @@ import QuestionWrapper from './Question/QuestionPreview';
 const Feedback: React.FC = () => {
   const { selectedQuestionId } = useQuestionContext();
 
-  const question = mockQuestions.find(
-    (question) => question.id === selectedQuestionId,
-  );
+  const question = mockQuestions.find((question) => question.id === selectedQuestionId);
 
   if (!question) return null;
 

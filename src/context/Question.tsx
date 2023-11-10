@@ -1,11 +1,4 @@
-import {
-  Dispatch,
-  PropsWithChildren,
-  SetStateAction,
-  createContext,
-  useContext,
-  useState,
-} from 'react';
+import { Dispatch, PropsWithChildren, SetStateAction, createContext, useContext, useState } from 'react';
 
 interface QuestionContextProps {
   selectedQuestionId: Nullable<string>;
@@ -18,8 +11,7 @@ const QuestionContext = createContext<QuestionContextProps>(null!);
 const QuestionProvider: React.FC<PropsWithChildren> = (props) => {
   const { children } = props;
 
-  const [selectedQuestionId, setSelectedQuestionId] =
-    useState<Nullable<string>>(null);
+  const [selectedQuestionId, setSelectedQuestionId] = useState<Nullable<string>>(null);
 
   return (
     <QuestionContext.Provider
@@ -33,7 +25,6 @@ const QuestionProvider: React.FC<PropsWithChildren> = (props) => {
   );
 };
 
-const useQuestionContext = (): QuestionContextProps =>
-  useContext(QuestionContext);
+const useQuestionContext = (): QuestionContextProps => useContext(QuestionContext);
 
 export { QuestionProvider, useQuestionContext };

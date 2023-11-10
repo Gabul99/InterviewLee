@@ -23,17 +23,11 @@ const QuestionContainer: React.FC<Props> = (props) => {
 
   return (
     <S.Container focused={focused}>
-      <QuestionWrapper
-        focused={focused}
-        question={question}
-        onClick={onClick}
-      />
+      <QuestionWrapper focused={focused} question={question} onClick={onClick} />
       {focused && (
         <>
           <AnswerInput id={question.id} />
-          {question.answers.length ? (
-            <RecentAnswerList answers={question.answers} />
-          ) : null}
+          {question.answers.length ? <RecentAnswerList answers={question.answers} /> : null}
         </>
       )}
     </S.Container>
