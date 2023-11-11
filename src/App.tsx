@@ -1,12 +1,15 @@
 import React from 'react';
 import { Routes } from './router/Routes';
 import { QuestionProvider } from './context/Question';
+import { AuthProvider } from './context/Auth';
 
 function App() {
   return (
-    <QuestionProvider>
-      <Routes />
-    </QuestionProvider>
+    <AuthProvider>
+      <QuestionProvider>
+        <Routes />
+      </QuestionProvider>
+    </AuthProvider>
   );
 }
 

@@ -19,13 +19,7 @@ const AnswerInput: React.FC<Props> = (props) => {
   return (
     <S.Container>
       <h2>A:</h2>
-      <S.Textarea
-        value={value}
-        onChange={(e) => setValue(e.target.value)}
-        placeholder="Write your answer!"
-        disabled={confirmed}
-        confirmed={confirmed}
-      />
+      <S.Textarea value={value} onChange={(e) => setValue(e.target.value)} placeholder="Write your answer!" disabled={confirmed} confirmed={confirmed} />
       <PrimaryButton
         style={{ alignSelf: 'flex-end' }}
         label={confirmed ? 'Request Feedback' : 'Answer!'}
@@ -36,6 +30,7 @@ const AnswerInput: React.FC<Props> = (props) => {
             setSelectedQuestionId(id);
           }
         }}
+        disabled={value.trim().length === 0}
       />
     </S.Container>
   );
