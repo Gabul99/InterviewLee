@@ -2,8 +2,13 @@ import * as S from './Rank.style';
 import React, { useState } from 'react';
 import { Colors } from '../../../styles/colors';
 import CampusPopUp from './CampusPopUp';
+import { Campus } from '../../../models/Common/Campus';
 
-const Rank = () => {
+interface RankProps {
+  campus_cur: Campus; // Pass the Campus object as a prop
+}
+
+const Rank: React.FC<RankProps> = ({ campus_cur }) => {
   const [isHovered, setIsHovered] = useState(false);
   const handleMouseEnter = () => {
     setIsHovered(true);
@@ -27,17 +32,17 @@ const Rank = () => {
 
   return (
     <S.Container>
-      {isHovered && <CampusPopUp style={popUpStyles} />}
+      {isHovered && <CampusPopUp campus={campus_cur} style={popUpStyles} />}
       <S.RankWrapper onMouseEnter={handleMouseEnter} onMouseLeave={handleMouseLeave}>
         <S.RankUnit style={rankStyles}>
           <S.RankNo>
-            <h1>1.</h1>
+            <h1>{campus_cur.rank}</h1>
           </S.RankNo>
           <S.CampusName>
-            <p>Korea Advanced Institute of Science and Technology</p>
+            <p>{campus_cur.campus}</p>
           </S.CampusName>
           <S.CampusScore>
-            <h1>1234</h1>
+            <h1>{campus_cur.points}</h1>
           </S.CampusScore>
         </S.RankUnit>
       </S.RankWrapper>

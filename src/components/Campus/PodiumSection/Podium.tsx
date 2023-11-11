@@ -1,5 +1,7 @@
 import * as S from './Podium.style';
-import KAIST_Icon from '../../../assets/KAIST.png';
+import KAIST from '../../../assets/KAIST.png';
+import SNU from '../../../assets/SNU.png';
+import MIT from '../../../assets/MIT.png';
 
 const Podium: React.FC = () => {
   return (
@@ -7,7 +9,7 @@ const Podium: React.FC = () => {
       <S.Podium>
         <S.PodiumUnit>
           <S.CampusLogoContainer>
-            <S.CampusLogo src={KAIST_Icon} />
+            <S.CampusLogo src={MIT} />
           </S.CampusLogoContainer>
           <S.SecondPlace>
             <h1>2</h1>
@@ -15,7 +17,7 @@ const Podium: React.FC = () => {
         </S.PodiumUnit>
         <S.PodiumUnit>
           <S.CampusLogoContainer>
-            <S.CampusLogo src={KAIST_Icon} />
+            <S.CampusLogo src={KAIST} />
           </S.CampusLogoContainer>
           <S.FirstPlace>
             <h1>1</h1>
@@ -23,7 +25,7 @@ const Podium: React.FC = () => {
         </S.PodiumUnit>
         <S.PodiumUnit>
           <S.CampusLogoContainer>
-            <S.CampusLogo src={KAIST_Icon} />
+            <S.CampusLogo src={SNU} />
           </S.CampusLogoContainer>
           <S.ThirdPlace>
             <h1>3</h1>
