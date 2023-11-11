@@ -2,8 +2,14 @@ import * as S from './CampusPopUp.style';
 import React, { useState } from 'react';
 import { Colors } from '../../../styles/colors';
 import KAIST_Icon from '../../../assets/KAIST.png';
+import { Campus } from '../../../models/Common/Campus';
 
-const CampusPopUp: React.FC<{ style?: React.CSSProperties }> = ({ style }) => {
+interface CampusPopUpProps {
+  campus: Campus;
+  style?: React.CSSProperties;
+}
+
+const CampusPopUp: React.FC<CampusPopUpProps> = ({ campus, style }) => {
   return (
     <S.CampusPopUp style={style}>
       <S.CampusPopUpLeft>
@@ -11,10 +17,10 @@ const CampusPopUp: React.FC<{ style?: React.CSSProperties }> = ({ style }) => {
           <S.CampusLogo src={KAIST_Icon} />
         </S.CampusLogoContainer>
         <S.CampusName>
-          <h1>KAIST</h1>
+          <h1>{campus.campus}</h1>
         </S.CampusName>
         <S.CampusPoints>
-          <h3>1234 points</h3>
+          <h3>{campus.points} points</h3>
         </S.CampusPoints>
       </S.CampusPopUpLeft>
       <S.CampusPopUpRight>
@@ -23,7 +29,7 @@ const CampusPopUp: React.FC<{ style?: React.CSSProperties }> = ({ style }) => {
             <p>No. of Total Users:</p>
           </S.PointCategoryDescription>
           <S.PointCategory>
-            <p>4354</p>
+            <p>{campus.total_user}</p>
           </S.PointCategory>
         </S.PointCategoryRow>
         <S.PointCategoryRow>
@@ -31,7 +37,7 @@ const CampusPopUp: React.FC<{ style?: React.CSSProperties }> = ({ style }) => {
             <p>No. of Active Users:</p>
           </S.PointCategoryDescription>
           <S.PointCategory>
-            <p>435</p>
+            <p>{campus.total_active} </p>
           </S.PointCategory>
         </S.PointCategoryRow>
         <S.PointCategoryRow>
@@ -39,7 +45,7 @@ const CampusPopUp: React.FC<{ style?: React.CSSProperties }> = ({ style }) => {
             <p>No. of Questions:</p>
           </S.PointCategoryDescription>
           <S.PointCategory>
-            <p>3</p>
+            <p>{campus.question_no}</p>
           </S.PointCategory>
         </S.PointCategoryRow>
         <S.PointCategoryRow>
@@ -47,7 +53,7 @@ const CampusPopUp: React.FC<{ style?: React.CSSProperties }> = ({ style }) => {
             <p>No. of Responses:</p>
           </S.PointCategoryDescription>
           <S.PointCategory>
-            <p>45</p>
+            <p>{campus.response_no} </p>
           </S.PointCategory>
         </S.PointCategoryRow>
       </S.CampusPopUpRight>

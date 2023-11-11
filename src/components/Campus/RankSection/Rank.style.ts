@@ -15,8 +15,9 @@ export const RankUnit = styled.div`
   display: flex;
   flex-direction: row;
   height: 76px;
+  width: 800px;
   align-items: center;
-  gap: 120px;
+  justify-content: space-between;
   border-bottom: 1px solid ${Colors.Secondary};
 `;
 
