@@ -12,11 +12,7 @@ const GNB = () => {
       <S.logo>InterviewLee</S.logo>
       <S.list>
         {paths.map((path) => (
-          <S.item
-            key={path}
-            className={path === pathname ? 'selected' : ''}
-            onClick={() => push(path as RoutePath)}
-          >
+          <S.item key={path} className={path === pathname ? 'selected' : ''} onClick={() => push(path as RoutePath)}>
             {capitalizeFirstLetter(path.split('/')[1])}
           </S.item>
         ))}

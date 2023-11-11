@@ -1,5 +1,6 @@
 import { mockQuestions } from '../../../api/mocks/question.mock';
 import { useQuestionContext } from '../../../context/Question';
+import Evaluation from './Evaluation';
 import * as S from './index.style';
 import SelectedAnswer from './SelectedAnswer';
 import SelectedQuestion from './SelectedQuestion';
@@ -15,7 +16,12 @@ const Feedback: React.FC = () => {
   return (
     <S.Container>
       <SelectedQuestion question={question} />
-      {answer && <SelectedAnswer answer={answer} />}
+      {answer && (
+        <>
+          <SelectedAnswer answer={answer} />
+          <Evaluation />
+        </>
+      )}
     </S.Container>
   );
 };
