@@ -22,4 +22,4 @@ export function useRouter() {
   }, [navigate]);
 }
 
-export type RoutePath = '/' | '/home' | '/board' | '/report' | '/campus';
+export type RoutePath = '/' | '/board' | '/report' | '/campus';
