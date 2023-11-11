@@ -3,7 +3,7 @@ import { User } from '../Common/User';
 import { Answer } from './Answer';
 
 export interface Question {
-  id: string;
+  id: ID;
   author: User;
   title: string;
   description: string;

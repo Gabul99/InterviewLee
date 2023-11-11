@@ -6,11 +6,7 @@ import { useQuestionContext } from '../../context/Question';
 const Board: React.FC = () => {
   const { selectedQuestionId } = useQuestionContext();
 
-  return (
-    <S.Container>
-      {selectedQuestionId === null ? <QuestionList /> : <Feedback />}
-    </S.Container>
-  );
+  return <S.Container>{selectedQuestionId === null ? <QuestionList /> : <Feedback />}</S.Container>;
 };
 
 export default Board;
