@@ -23,12 +23,12 @@ export const mockQuestions: Question[] = [
     answers: [
       {
         id: '1',
-        author: mockUser[1],
+        author: mockUser[0],
         description: 'You should write a good resume.',
         rating: 3,
       },
       {
-        id: '1',
+        id: '2',
         author: mockUser[1],
         description: '졸업부터 하고 오세요',
         rating: 3,
