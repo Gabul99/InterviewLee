@@ -1,19 +1,56 @@
 import { useAuthContext } from '../../../context/Auth';
 import { Answer } from '../../../models/Board/Answer';
+import { Comment as CommentModel } from '../../../models/Board/Comment';
 import ProfileIcon from '../../Common/Icons/ProfileIcon';
+import ExistComment from './ExistComment';
+import NewComment from './NewComment';
 import * as S from './SelectedAnswer.style';
-import React from 'react';
+import React, { useEffect, useState } from 'react';
 
 interface Props {
   answer: Answer;
 }
 
 const SelectedAnswer: React.FC<Props> = (props) => {
+  const [comments, setComments] = useState<CommentModel[]>([]);
+  const [anchorIndex, setAnchorIndex] = useState<number | null>(null);
+  const [lastIndex, setLastIndex] = useState<number | null>(null);
+  const [tempComment, setTempComment] = useState<CommentModel | null>(null);
+  const [selectedCommentId, setSelectedCommentId] = useState<string | null>(null);
   const { answer } = props;
 
   const { profile } = useAuthContext();
 
   const name = profile.id === answer.author.id ? 'You' : 'Anonymous';
+
+  const highlight = (idx: number) => {
+    if (tempComment) {
+      const min = Math.min(tempComment.startIndex, tempComment.lastIndex);
+      const max = Math.max(tempComment.startIndex, tempComment.lastIndex);
+      if (idx >= min && idx <= max) return 'yellow-selected';
+    }
+    if (selectedCommentId) {
+      const selected = comments.filter((com) => com.id === selectedCommentId)[0];
+      const min = Math.min(selected.startIndex, selected.lastIndex);
+      const max = Math.max(selected.startIndex, selected.lastIndex);
+      if (idx >= min && idx <= max) return 'yellow-selected';
+    }
+    for (let i = 0; i < comments.length; i++) {
+      const comment = comments[i];
+      const min = Math.min(comment.startIndex, comment.lastIndex);
+      const max = Math.max(comment.startIndex, comment.lastIndex);
+      if (idx >= min && idx <= max) return 'yellow-not';
+    }
+    return '';
+  };
+
+  const getCommentByIdx = (idx: number) => {
+    for (let i = 0; i < comments.length; i++) {
+      const comment = comments[i];
+      if (idx >= comment.startIndex && idx <= comment.lastIndex) return comment.id;
+    }
+    return null;
+  };
 
   return (
     <S.Container>
@@ -22,8 +59,73 @@ const SelectedAnswer: React.FC<Props> = (props) => {
         <p>{name}</p>
       </div>
       <S.Content>
-        <S.AnswerWrapper>{answer.description}</S.AnswerWrapper>
-        <S.CommentWrapper></S.CommentWrapper>
+        <S.AnswerWrapper id={'answers'}>
+          <p>
+            {Array.from(answer.description).map((char, idx) => (
+              <S.Char
+                key={`${idx}${char}${highlight(idx)}`}
+                className={highlight(idx)}
+                onMouseDown={() => {
+                  if (highlight(idx) === 'yellow-not') {
+                    setSelectedCommentId(getCommentByIdx(idx));
+                  } else {
+                    setAnchorIndex(idx);
+                    setLastIndex(idx);
+                    setSelectedCommentId(null);
+                  }
+                }}
+                onMouseEnter={() => {
+                  if (anchorIndex !== null) setLastIndex(idx);
+                }}
+                onMouseUp={() => {
+                  if (anchorIndex && lastIndex) {
+                    setTempComment({
+                      id: `${comments.length + 1}`,
+                      authorId: 'you',
+                      answerId: 'abc',
+                      startIndex: anchorIndex,
+                      lastIndex: lastIndex,
+                      comment: '',
+                      subComments: [],
+                    });
+                  }
+                  setAnchorIndex(null);
+                  setLastIndex(null);
+                }}
+              >
+                {char}
+              </S.Char>
+            ))}
+          </p>
+        </S.AnswerWrapper>
+        <S.CommentWrapper>
+          {comments
+            .sort((a, b) => a.startIndex - b.startIndex)
+            .map((comment, idx) => {
+              return (
+                <ExistComment
+                  key={idx}
+                  data={comment}
+                  selected={selectedCommentId === comment.id}
+                  onSelect={() => {
+                    setSelectedCommentId(comment.id);
+                    setTempComment(null);
+                  }}
+                  onSubmit={() => console.log('hi')}
+                />
+              );
+            })}
+          {tempComment !== null && (
+            <NewComment
+              data={tempComment}
+              onSubmit={(value: string) => {
+                setComments([...comments, { ...tempComment, comment: value }]);
+                setTempComment(null);
+                setSelectedCommentId(tempComment.id);
+              }}
+            />
+          )}
+        </S.CommentWrapper>
       </S.Content>
     </S.Container>
   );
