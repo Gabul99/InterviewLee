@@ -1,5 +1,5 @@
 import * as S from './UserProfile.style';
-import TestImage from '../../../assets/test.jpeg';
+import TestImage from '../../../assets/profile.png';
 
 const UserProfile: React.FC = () => {
   return (
@@ -8,10 +8,8 @@ const UserProfile: React.FC = () => {
         <S.ProfileImage src={TestImage} />
       </S.ProfileImageContainer>
       <S.ProfileContent>
-        <S.ProfileName>
-          <h2 className="name">Jaehee Lee</h2>
-          <p className="user-id">User 123456</p>
-        </S.ProfileName>
+        <h2 className="name">Jaehee Lee</h2>
+        <p className="user-id">User 123456</p>
         <S.ProfileActvities>
           <div className="row">
             <span>No. of Responses:</span>

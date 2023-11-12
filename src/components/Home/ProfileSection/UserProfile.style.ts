@@ -1,5 +1,4 @@
 import { styled } from 'styled-components';
-import { Colors } from '../../../styles/colors';
 
 export const Container = styled.div`
   display: flex;
@@ -8,8 +7,8 @@ export const Container = styled.div`
 `;
 
 export const ProfileImageContainer = styled.div`
-  width: 240px;
-  height: 240px;
+  width: 156px;
+  height: 156px;
   border-radius: 50%;
   overflow: hidden;
 `;
@@ -22,7 +21,27 @@ export const ProfileImage = styled.img`
 export const ProfileContent = styled.div`
   display: flex;
   flex-direction: column;
-  gap: 76px;
+  gap: 10px;
+
+  h2.name {
+    color: #000;
+
+    font-family: Outfit;
+    font-size: 48px;
+    font-style: normal;
+    font-weight: 700;
+    line-height: normal;
+  }
+
+  p.user-id {
+    color: #0b409c;
+
+    font-family: Outfit;
+    font-size: 20px;
+    font-style: normal;
+    font-weight: 500;
+    line-height: normal;
+  }
 `;
 
 export const ProfileName = styled.div`
@@ -31,16 +50,23 @@ export const ProfileName = styled.div`
   gap: 10px;
 
   h2.name {
-    font-size: 80px;
+    color: #000;
+
+    font-family: Outfit;
+    font-size: 48px;
     font-style: normal;
     font-weight: 700;
+    line-height: normal;
   }
 
   p.user-id {
-    font-size: 24px;
+    color: #0b409c;
+
+    font-family: Outfit;
+    font-size: 20px;
     font-style: normal;
     font-weight: 500;
-    color: ${Colors.Primary};
+    line-height: normal;
   }
 `;
 
@@ -49,9 +75,8 @@ export const ProfileActvities = styled.div`
   flex-direction: column;
 
   padding: 8px 16px;
-  border-radius: 4px;
-
-  background-color: ${Colors.Highlight_30};
+  border-radius: 5px;
+  background: rgba(255, 232, 103, 0.3);
 
   div.row {
     display: flex;
@@ -61,10 +86,13 @@ export const ProfileActvities = styled.div`
     width: 100%;
 
     span {
-      font-size: 24px;
+      color: #10316b;
+
+      font-family: Inter;
+      font-size: 20px;
       font-style: normal;
       font-weight: 500;
-      color: ${Colors.Primary};
+      line-height: normal;
 
       &:last-child {
         font-weight: 700;
