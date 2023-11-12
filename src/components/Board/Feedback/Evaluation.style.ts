@@ -6,15 +6,15 @@ export const Container = styled.div`
   gap: 8px;
 
   height: 50px;
+  margin-top: 32px;
 
   p {
     color: #000;
 
     font-family: Inter;
-    font-size: 16px;
+    font-size: 20px;
     font-style: normal;
-    font-weight: 500;
-    line-height: 150.023%; /* 24.004px */
+    font-weight: bold;
   }
 `;
 
@@ -64,7 +64,7 @@ export const Description = styled.div`
       color: #000;
 
       font-family: Inter;
-      font-size: 24px;
+      font-size: 20px;
       font-style: normal;
       font-weight: 700;
     }

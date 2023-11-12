@@ -32,7 +32,7 @@ export const QuestionDescriptionWrapper = styled.div`
     color: #000;
 
     font-family: Inter;
-    font-size: 20px;
+    font-size: 24px;
     font-style: normal;
     font-weight: bold;
     line-height: normal;

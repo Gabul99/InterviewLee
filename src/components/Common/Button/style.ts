@@ -17,4 +17,6 @@ export const ButtonWrapper = styled.button<{ background: string }>`
   font-style: normal;
   font-weight: 500;
   line-height: 24px; /* 120% */
+
+  cursor: pointer;
 `;

@@ -19,19 +19,19 @@ const Evaluation: React.FC = () => {
         <S.Title>{`Total Avg. `}</S.Title>
         <S.Description>
           <div className="column">
-            <p>Clarity</p>
+            <p>Clarity: </p>
             <p>??</p>
           </div>
           <div className="column">
-            <p>Uniqueness</p>
+            <p>Uniqueness: </p>
             <p>??</p>
           </div>
           <div className="column">
-            <p>Depth</p>
+            <p>Depth: </p>
             <p>??</p>
           </div>
           <div className="column">
-            <p>Follow-up</p>
+            <p>Follow-up: </p>
             <p>??</p>
           </div>
         </S.Description>

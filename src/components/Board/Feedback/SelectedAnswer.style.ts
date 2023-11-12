@@ -16,7 +16,7 @@ export const Container = styled.div`
     p {
       color: #000;
 
-      font-size: 14px;
+      font-size: 18px;
       font-style: normal;
       font-weight: 600;
       line-height: normal;
@@ -39,7 +39,7 @@ export const AnswerWrapper = styled.div`
   color: #000;
 
   font-family: Inter;
-  font-size: 14px;
+  font-size: 16px;
   font-style: normal;
   font-weight: 400;
   line-height: 150.023%; /* 21.003px */
