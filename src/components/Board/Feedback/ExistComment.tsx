@@ -2,7 +2,7 @@ import React, { useState } from 'react';
 import styled from 'styled-components';
 import { Colors } from '../../../styles/colors';
 import ProfileIcon from '../../Common/Icons/ProfileIcon';
-import { Comment as CommentModel } from '../../../models/Board/Comment';
+import { Comment as CommentModel, SubComment } from '../../../models/Board/Comment';
 
 const Container = styled.div`
   width: 100%;
@@ -50,6 +50,12 @@ const Contents = styled.p`
   font-weight: 400;
 `;
 
+const SubCommentList = styled.div`
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+`;
+
 const ButtonArea = styled.div`
   width: 100%;
   display: flex;
@@ -74,10 +80,10 @@ interface Props {
   data: CommentModel;
   selected: boolean;
   onSelect: () => void;
-  onSubmit: (value: string) => void;
+  onSubComment: (value: SubComment) => void;
 }
 
-const ExistComment: React.FC<Props> = ({ data, selected, onSelect, onSubmit }: Props) => {
+const ExistComment: React.FC<Props> = ({ data, selected, onSelect, onSubComment }: Props) => {
   const [tempReply, setTempReply] = useState<string>('');
 
   return (
@@ -91,6 +97,13 @@ const ExistComment: React.FC<Props> = ({ data, selected, onSelect, onSubmit }: P
       {selected && (
         <>
           <Contents>{data.comment}</Contents>
+          {data.subComments.length > 0 && (
+            <SubCommentList>
+              {data.subComments.map((comment) => (
+                <SubCommentUI key={comment.authorId + comment.comment} data={comment} />
+              ))}
+            </SubCommentList>
+          )}
           <Input
             value={tempReply}
             placeholder="Write your feedback conmment"
@@ -101,7 +114,12 @@ const ExistComment: React.FC<Props> = ({ data, selected, onSelect, onSubmit }: P
           <ButtonArea>
             <Button
               onClick={() => {
-                console.log('hihihi');
+                if (tempReply === '') return;
+                onSubComment({
+                  authorId: 'someone',
+                  comment: tempReply,
+                });
+                setTempReply('');
               }}
             >
               Post
@@ -110,6 +128,49 @@ const ExistComment: React.FC<Props> = ({ data, selected, onSelect, onSubmit }: P
         </>
       )}
     </Container>
+  );
+};
+
+const SubCommentContainer = styled.div`
+  width: 100%;
+  padding: 8px 0;
+  border-bottom: 1px solid rgba(0, 0, 0, 0.08);
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+`;
+
+const SubCommentProfile = styled.div`
+  width: 100%;
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: space-between;
+
+  .profile {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    gap: 8px;
+
+    p {
+      font-size: 12px;
+      font-weight: 600;
+    }
+  }
+`;
+
+const SubCommentUI = ({ data }: { data: SubComment }) => {
+  return (
+    <SubCommentContainer>
+      <SubCommentProfile>
+        <div className={'profile'}>
+          <ProfileIcon />
+          <p>{data.authorId}</p>
+        </div>
+      </SubCommentProfile>
+      <Contents>{data.comment}</Contents>
+    </SubCommentContainer>
   );
 };
 

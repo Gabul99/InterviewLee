@@ -1,6 +1,6 @@
 import { useAuthContext } from '../../../context/Auth';
 import { Answer } from '../../../models/Board/Answer';
-import { Comment as CommentModel } from '../../../models/Board/Comment';
+import { Comment as CommentModel, SubComment } from '../../../models/Board/Comment';
 import ProfileIcon from '../../Common/Icons/ProfileIcon';
 import ExistComment from './ExistComment';
 import NewComment from './NewComment';
@@ -22,6 +22,18 @@ const SelectedAnswer: React.FC<Props> = (props) => {
   const { profile } = useAuthContext();
 
   const name = profile.id === answer.author.id ? 'You' : 'Anonymous';
+
+  const postSubComment = (commentId: string, subComment: SubComment) => {
+    setComments(
+      comments.map((comment) => {
+        if (comment.id !== commentId) return comment;
+        return {
+          ...comment,
+          subComments: [...comment.subComments, subComment],
+        };
+      }),
+    );
+  };
 
   const highlight = (idx: number) => {
     if (tempComment) {
@@ -111,7 +123,7 @@ const SelectedAnswer: React.FC<Props> = (props) => {
                     setSelectedCommentId(comment.id);
                     setTempComment(null);
                   }}
-                  onSubmit={() => console.log('hi')}
+                  onSubComment={(subComment: SubComment) => postSubComment(comment.id, subComment)}
                 />
               );
             })}
