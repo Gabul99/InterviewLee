@@ -4,10 +4,16 @@ const mockUser = [
   {
     id: '1',
     name: 'John Doe',
+    campus: 'MIT',
+    question_no: 10,
+    response_no: 15,
   },
   {
     id: '2',
     name: 'Jaehee',
+    campus: 'KAIST',
+    question_no: 15,
+    response_no: 15,
   },
 ];
 
@@ -39,6 +45,9 @@ export const mockQuestions: Question[] = [
     author: {
       id: '2',
       name: 'Jaehee',
+      campus: 'KAIST',
+      question_no: 15,
+      response_no: 15,
     },
     title: '진짜 졸업하고 싶어요',
     description: '졸업하는 방법 좀 알려주세요',
