@@ -1,9 +1,10 @@
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 import { mockQuestions } from '../../api/mocks/question.mock';
 import PrimaryButton from '../Common/Button/PrimaryButton';
 import QuestionContainer from './Question/Container';
 import * as S from './QuestionList.style';
 import QuestionPost from './QuestionPost';
+import { addUser, getUsers } from '../../repository/User';
 
 const QuestionList: React.FC = () => {
   const [postQuestionModalOpen, setPostQuestionModalOpen] = useState(false);
