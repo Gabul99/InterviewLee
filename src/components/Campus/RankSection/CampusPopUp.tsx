@@ -1,7 +1,7 @@
 import * as S from './CampusPopUp.style';
 import React, { useState } from 'react';
 import { Colors } from '../../../styles/colors';
-import KAIST_Icon from '../../../assets/KAIST.png';
+import UNI_LOGO from '../../../assets/university.png';
 import { Campus } from '../../../models/Common/Campus';
 
 interface CampusPopUpProps {
@@ -14,7 +14,7 @@ const CampusPopUp: React.FC<CampusPopUpProps> = ({ campus, style }) => {
     <S.CampusPopUp style={style}>
       <S.CampusPopUpLeft>
         <S.CampusLogoContainer>
-          <S.CampusLogo src={KAIST_Icon} />
+          <S.CampusLogo src={UNI_LOGO} />
         </S.CampusLogoContainer>
         <S.CampusName>
           <h1>{campus.campus}</h1>

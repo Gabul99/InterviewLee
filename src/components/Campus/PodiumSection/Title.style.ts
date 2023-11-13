@@ -25,10 +25,10 @@ export const HoverContainer = styled.div`
 `;
 
 export const HoverDescription = styled.p`
-  margin-top: 20px;
+  margin-top: 40px;
   display: block;
   font-family: Inter;
-  font-size: 18px;
+  font-size: 24px;
   font-style: normal;
   font-weight: 900;
   line-height: 12px; /* 100% */
@@ -75,4 +75,23 @@ export const HoverPopUpText = styled.p`
   font-style: normal;
   font-weight: 500;
   line-height: 30px; /* 166.667% */
+`;
+
+export const Contribution = styled.div`
+  display: flex;
+  flex-direction: row;
+  margin-top: 30px;
+  border-radius: 10px;
+  width: fit-content;
+  border: 2px solid ${Colors.Secondary};
+  padding: 7px;
+  margin-left: auto;
+
+  h1 {
+    color: ${Colors.Secondary};
+    font-family: Outfit;
+    font-size: 24px;
+    font-style: normal;
+    line-height: normal;
+  }
 `;

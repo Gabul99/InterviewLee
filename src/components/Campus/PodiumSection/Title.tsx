@@ -16,7 +16,7 @@ const Title = () => {
     <S.TitleContainer>
       <S.Title>Campus</S.Title>
       <S.HoverContainer>
-        <S.HoverDescription>TOP 3 for 4th Week of October!</S.HoverDescription>
+        <S.HoverDescription>TOP 3 for 4th Week of October</S.HoverDescription>
         <S.HoverIconWrapper onMouseEnter={handleMouseEnter} onMouseLeave={handleMouseLeave}>
           <S.HoverIconContainer>
             <S.HoverIcon src={InfoIcon} />
@@ -36,6 +36,11 @@ const Title = () => {
           </S.HoverIconContainer>
         </S.HoverIconWrapper>
       </S.HoverContainer>
+      <S.Contribution>
+        <h1>
+          Wow! You have contributed <span style={{ fontWeight: 'bold' }}>25</span> points to <span style={{ fontWeight: 'bold' }}>KAIST</span>!
+        </h1>
+      </S.Contribution>
     </S.TitleContainer>
   );
 };
