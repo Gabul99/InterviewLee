@@ -1,5 +1,4 @@
 import { useRouter, RoutePath } from '../../router/routing';
-import { capitalizeFirstLetter } from '../../utils/format';
 import * as S from './GNB.style';
 
 import ProfileImage from '../../assets/profile.png';
@@ -11,6 +10,21 @@ const GNB = () => {
 
   const paths = ['/', '/board', '/report', '/campus'];
 
+  const getPathName = (path: string) => {
+    switch (path) {
+      case '/':
+        return 'Home';
+      case '/board':
+        return 'Question Board';
+      case '/report':
+        return 'Reports';
+      case '/campus':
+        return 'Campus Spirit';
+      default:
+        return '';
+    }
+  };
+
   return (
     <S.main>
       <S.logo>
@@ -20,7 +34,7 @@ const GNB = () => {
       <S.list>
         {paths.map((path) => (
           <S.item key={path} className={path === pathname ? 'selected' : ''} onClick={() => push(path as RoutePath)}>
-            {path === '/' ? 'Home' : capitalizeFirstLetter(path.split('/')[1])}
+            {getPathName(path)}
           </S.item>
         ))}
       </S.list>

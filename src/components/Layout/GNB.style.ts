@@ -49,8 +49,8 @@ export const item = styled.li`
   align-items: center;
   gap: 21px;
 
-  width: 210px;
-  height: 47px;
+  width: 200px;
+  height: 42px;
   padding: 0 20px 0 10px;
   border-radius: 100px;
 
