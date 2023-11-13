@@ -8,6 +8,7 @@ export const Container = styled.div`
   flex: 1;
   height: 100%;
   padding: 40px;
+  overflow-y: auto;
 
   background-color: ${Colors.White};
 `;
