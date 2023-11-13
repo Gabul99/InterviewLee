@@ -23,9 +23,11 @@ const QuestionWrapper: React.FC<QuestionWrapperProps> = ({ question, onClick, fo
     <S.Container onClick={(e) => onClick?.(e)}>
       <h2>Q:</h2>
       <S.QuestionContentWrapper>
-        {tags.map((tag) => (
-          <S.TagWrapper key={tag}>{`#${tag}`}</S.TagWrapper>
-        ))}
+        <S.TagContainer>
+          {tags.map((tag) => (
+            <S.TagWrapper key={tag}>{`#${tag}`}</S.TagWrapper>
+          ))}
+        </S.TagContainer>
         <p>{questionValue}</p>
         <span>{answers.length ? `${answers.length.toLocaleString()} people have responded` : ''}</span>
       </S.QuestionContentWrapper>

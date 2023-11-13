@@ -32,6 +32,12 @@ export const QuestionContentWrapper = styled.div`
   }
 `;
 
+export const TagContainer = styled.div`
+  display: flex;
+  flex-direction: row;
+  gap: 8px;
+`;
+
 export const TagWrapper = styled.div`
   display: flex;
   padding: 4px 8px;
@@ -43,4 +49,9 @@ export const TagWrapper = styled.div`
   border-radius: 12px;
   border: 1px solid var(--Indigo, #10316b);
   background: var(--Light-Blue, #f2f7ff);
+
+  &:nth-child(2) {
+    background: var(--Yellow, #ffe867);
+    border: 1px solid rgba(0, 0, 0, 0.4);
+  }
 `;

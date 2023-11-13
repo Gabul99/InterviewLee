@@ -12,11 +12,13 @@ interface Props {
 }
 
 const QuestionPost: React.FC<Props> = (props) => {
-  const { profile } = useAuthContext();
-  const tagNames = ['Culture Fit', 'Interview', 'Travel', 'Family', 'Ambition', 'Hobby', 'Spirit', 'Leadership'];
   const { onClose } = props;
+
+  const { profile } = useAuthContext();
+
   const [value, setValue] = useState('');
   const [tagStates, setTagStates] = useState<string[]>([]);
+
   const handleTagClick = (tagName: string) => {
     if (tagStates.includes(tagName)) setTagStates(tagStates.filter((tag) => tag !== tagName));
     else setTagStates([...tagStates, tagName]);
@@ -88,3 +90,5 @@ const QuestionPost: React.FC<Props> = (props) => {
 };
 
 export default QuestionPost;
+
+const tagNames = ['Culture Fit', 'Interview', 'Travel', 'Family', 'Ambition', 'Hobby', 'Spirit', 'Leadership'];

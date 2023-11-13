@@ -10,9 +10,16 @@ const QuestionList: React.FC = () => {
   const [questions, setQuestions] = useState<Question[]>([]);
   const [postQuestionModalOpen, setPostQuestionModalOpen] = useState(false);
 
+  const handleClosePostModal = () => {
+    if (window.confirm('Your campus will get 5 points!')) {
+      setPostQuestionModalOpen(false);
+    }
+  };
+
+  // NOTE: 질문 생성 모달의 노출 여부에 따라서도 subscribe 해야함
   useEffect(() => {
     getQuestions().then((data) => setQuestions(data ?? []));
-  }, []);
+  }, [postQuestionModalOpen]);
 
   return (
     <>
@@ -25,7 +32,7 @@ const QuestionList: React.FC = () => {
           }}
         />
       </S.TitleWrapper>
-      {postQuestionModalOpen && <QuestionPost onClose={() => setPostQuestionModalOpen(false)} />}
+      {postQuestionModalOpen && <QuestionPost onClose={handleClosePostModal} />}
       {!postQuestionModalOpen && (
         <S.QuestionWrapper>
           {questions.map((question) => (
