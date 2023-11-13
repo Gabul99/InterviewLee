@@ -27,6 +27,12 @@ const AnswerInput: React.FC<Props> = (props) => {
     if (!!myAnswer) setValue(myAnswer.description);
   }, [myAnswer]);
 
+  const postAnswer = async () => {
+    if (window.confirm('Your campus will get 5 points!')) {
+      await handleSubmit();
+    }
+  };
+
   const handleSubmit = async () => {
     if (value === '') return;
     const newAnswer: Answer = {
@@ -55,7 +61,7 @@ const AnswerInput: React.FC<Props> = (props) => {
             setSelectedQuestionId(question.id);
             setSelectedAnswerId(myAnswer.id);
           } else {
-            handleSubmit();
+            postAnswer();
           }
         }}
         disabled={value.trim().length === 0}
