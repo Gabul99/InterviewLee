@@ -1,6 +1,7 @@
 import RadarChart from './RadarChart';
 import * as S from './ReportDetail.style';
 import { AIReport } from '../../models/AIReport';
+import { getClarityDetail, getDepthDetail, getFollowUpDetail, getUniquenessDetail } from '../../utils/generateReportDetail';
 
 interface Props {
   review: AIReport;
@@ -27,10 +28,10 @@ const ReportDetail: React.FC<Props> = ({ review }: Props) => {
           <RadarChart report={review} />
         </S.TotalPointContainer>
         <S.DetailArea>
-          <DetailItem title="Clarity" point={review.clarity} />
-          <DetailItem title="Uniqueness" point={review.uniqueness} />
-          <DetailItem title="Depth" point={review.depth} />
-          <DetailItem title="Follow-up" point={review.follow_up} />
+          <DetailItem title="Clarity" point={review.clarity} advice={getClarityDetail(review.clarity)} />
+          <DetailItem title="Uniqueness" point={review.uniqueness} advice={getUniquenessDetail(review.uniqueness)} />
+          <DetailItem title="Depth" point={review.depth} advice={getDepthDetail(review.depth)} />
+          <DetailItem title="Follow-up" point={review.follow_up} advice={getFollowUpDetail(review.follow_up)} />
         </S.DetailArea>
       </S.PointArea>
       <S.OtherAnswerContainer>
@@ -67,15 +68,13 @@ const ReportDetail: React.FC<Props> = ({ review }: Props) => {
   );
 };
 
-const DetailItem = ({ title, point }: { title: string; point: number }) => {
+const DetailItem = ({ title, point, advice }: { title: string; point: number; advice: string }) => {
   return (
     <S.DetailItem>
       <h2 className="title">{title}</h2>
       <div className="horizontal">
         <div className="point">{point}</div>
-        <p className="body">
-          This answer is generally logical and has a good flow. But if you organize your answers a little more, there is room for improvement.
-        </p>
+        <p className="body">{advice}</p>
       </div>
     </S.DetailItem>
   );
