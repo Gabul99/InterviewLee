@@ -3,6 +3,7 @@ import styled from 'styled-components';
 import { Colors } from '../../../styles/colors';
 import ProfileIcon from '../../Common/Icons/ProfileIcon';
 import { Comment as CommentModel, SubComment } from '../../../models/Board/Comment';
+import { useAuthContext } from '../../../context/Auth';
 
 const Container = styled.div`
   width: 100%;
@@ -86,18 +87,20 @@ interface Props {
 const ExistComment: React.FC<Props> = ({ data, selected, onSelect, onSubComment }: Props) => {
   const [tempReply, setTempReply] = useState<string>('');
 
+  const { profile } = useAuthContext();
+
   return (
     <Container>
       <TitleArea onClick={onSelect}>
         <div className={'profile'}>
           <ProfileIcon />
-          <p>You</p>
+          <p>{profile.id === data.authorId ? 'You' : data.authorId}</p>
         </div>
       </TitleArea>
       {selected && (
         <>
           <Contents>{data.comment}</Contents>
-          {data.subComments.length > 0 && (
+          {data.subComments && (
             <SubCommentList>
               {data.subComments.map((comment) => (
                 <SubCommentUI key={comment.authorId + comment.comment} data={comment} />
@@ -116,7 +119,7 @@ const ExistComment: React.FC<Props> = ({ data, selected, onSelect, onSubComment 
               onClick={() => {
                 if (tempReply === '') return;
                 onSubComment({
-                  authorId: 'someone',
+                  authorId: profile.id,
                   comment: tempReply,
                 });
                 setTempReply('');
@@ -161,12 +164,14 @@ const SubCommentProfile = styled.div`
 `;
 
 const SubCommentUI = ({ data }: { data: SubComment }) => {
+  const { profile } = useAuthContext();
+
   return (
     <SubCommentContainer>
       <SubCommentProfile>
         <div className={'profile'}>
           <ProfileIcon />
-          <p>{data.authorId}</p>
+          <p>{profile.id === data.authorId ? 'You' : data.authorId}</p>
         </div>
       </SubCommentProfile>
       <Contents>{data.comment}</Contents>

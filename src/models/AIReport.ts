@@ -1,8 +1,9 @@
 export interface AIReport {
   id: ID;
-  userId: ID;
   questionId: ID;
   answerId: ID;
+  question: string;
+  answer: string;
   clarity: number;
   uniqueness: number;
   depth: number;

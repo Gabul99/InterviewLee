@@ -1,6 +1,6 @@
-import { AIReport } from '../../pages/report';
 import RadarChart from './RadarChart';
 import * as S from './ReportDetail.style';
+import { AIReport } from '../../models/AIReport';
 
 interface Props {
   review: AIReport;

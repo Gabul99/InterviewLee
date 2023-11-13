@@ -10,17 +10,17 @@ interface QuestionWrapperProps {
 const SelectedQuestion: React.FC<QuestionWrapperProps> = ({ question, onClick }: QuestionWrapperProps) => {
   const { selectedQuestionId, setSelectedQuestionId } = useQuestionContext();
 
-  const { description, tags } = question;
+  const { question: questionValue, tags } = question;
 
   return (
     <S.Container onClick={(e) => onClick?.(e)}>
       {tags.map((tag) => (
-        <S.TagWrapper key={tag.name}>{`#${tag.name}`}</S.TagWrapper>
+        <S.TagWrapper key={tag}>{`#${tag}`}</S.TagWrapper>
       ))}
       <S.QuestionWrapper>
         <h2>Q:</h2>
         <S.QuestionDescriptionWrapper>
-          <p>{description}</p>
+          <p>{questionValue}</p>
         </S.QuestionDescriptionWrapper>
         {selectedQuestionId && (
           <div style={{ alignSelf: 'flex-end' }} onClick={() => setSelectedQuestionId(null)}>

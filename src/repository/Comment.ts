@@ -8,16 +8,17 @@ export const getComments = async () => {
 
 export const getCommentsByAnswerId = async (id: ID) => {
   const comments = await getComments();
-  const target = comments.filter((c: any) => c.answerId === id)[0] ?? undefined;
+  const target = comments?.filter((c: any) => c.answerId === id) ?? undefined;
   return target;
 };
 
 export const addComment = async (comment: Comment) => {
   const comments = await getComments();
+  console.log(comments, comment);
   if (comments === undefined) {
-    setDBData('comments', [comments]);
+    setDBData('comments', [comment]);
   } else {
-    setDBData('comments', [...comments, comments]);
+    setDBData('comments', [...comments, comment]);
   }
 };
 
@@ -28,7 +29,7 @@ export const addSubComment = async (commentId: ID, subComment: SubComment) => {
     if (comment.id === commentId) {
       return {
         ...comment,
-        subComments: [...comment.subComments, subComment],
+        subComments: [...(comment.subComments ?? []), subComment],
       };
     } else {
       return comment;

@@ -4,11 +4,9 @@ import { Answer } from './Answer';
 
 export interface Question {
   id: ID;
-  author: User;
-  title: string;
-  description: string;
+  authorId: ID;
+  question: string;
   // max rating : 5
   rating: number;
-  answers: Answer[];
-  tags: Tag[];
+  tags: string[];
 }

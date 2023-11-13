@@ -8,7 +8,7 @@ export const getQuestions = async () => {
 
 export const getQuestionById = async (id: ID) => {
   const questions = await getQuestions();
-  const target = questions.filter((q: any) => q.id === id)[0] ?? undefined;
+  const target = questions?.filter((q: any) => q.id === id)[0] ?? undefined;
   return target;
 };
 
