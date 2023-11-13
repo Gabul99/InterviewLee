@@ -19,6 +19,7 @@ const Rank: React.FC<RankProps> = ({ campus_cur }) => {
   };
 
   const rankStyles: React.CSSProperties = {
+    position: 'relative',
     backgroundColor: isHovered ? Colors.Background : 'initial',
   };
 
