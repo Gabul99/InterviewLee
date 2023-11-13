@@ -89,3 +89,33 @@ export const Textarea = styled.textarea`
     background: transparent;
   }
 `;
+
+export const TagListWrapper = styled.div`
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+  width: 100%;
+  padding: 8px;
+  border-radius: 16px;
+  background: var(--White, #fff);
+`;
+
+export const TagList = styled.div`
+  display: flex;
+  flex-direction: row;
+  gap: 40px;
+`;
+
+export const Tag = styled.div`
+  display: flex;
+  padding: 4px 8px;
+  justify-content: center;
+  align-items: center;
+  cursor: pointer;
+
+  width: fit-content;
+
+  border-radius: 12px;
+  border: 1px solid var(--Indigo, #10316b);
+  background: var(--Light-Blue, #f2f7ff);
+`;
