@@ -2,20 +2,42 @@ import { useState } from 'react';
 import * as S from './QuestionPost.style';
 import PrimaryButton from '../Common/Button/PrimaryButton';
 import { Colors } from '../../styles/colors';
+import { v4 } from 'uuid';
+import { Question } from '../../models/Board/Question';
+import { useAuthContext } from '../../context/Auth';
+import { addQuestion } from '../../repository/Question';
 
 interface Props {
   onClose: () => void;
 }
 
 const QuestionPost: React.FC<Props> = (props) => {
+  const { profile } = useAuthContext();
   const tagNames = ['Culture Fit', 'Interview', 'Travel', 'Family', 'Ambition', 'Hobby', 'Spirit', 'Leadership'];
   const { onClose } = props;
   const [value, setValue] = useState('');
-  const [tagStates, setTagStates] = useState<Array<boolean>>(Array(tagNames.length).fill(false));
-  const handleTagClick = (index: number) => {
-    const newTagStates = [...tagStates];
-    newTagStates[index] = !newTagStates[index];
-    setTagStates(newTagStates);
+  const [tagStates, setTagStates] = useState<string[]>([]);
+  const handleTagClick = (tagName: string) => {
+    if (tagStates.includes(tagName)) setTagStates(tagStates.filter((tag) => tag !== tagName));
+    else setTagStates([...tagStates, tagName]);
+  };
+
+  const postNewQuestion = () => {
+    if (value === '') {
+      window.alert('Please fill above input!');
+      return;
+    }
+    const newQuestion: Question = {
+      id: v4(),
+      authorId: profile.id,
+      question: value,
+      // max rating : 5
+      rating: 0,
+      tags: tagStates,
+    };
+    addQuestion(newQuestion).then(() => {
+      onClose();
+    });
   };
 
   return (
@@ -37,17 +59,17 @@ const QuestionPost: React.FC<Props> = (props) => {
         </S.Description>
         <S.TagListWrapper>
           <S.TagList>
-            {tagStates.map((isClicked, index) => (
+            {tagNames.map((tag, index) => (
               <S.Tag
                 key={index}
-                onClick={() => handleTagClick(index)}
+                onClick={() => handleTagClick(tag)}
                 // Apply a different style if the tag is clicked
                 style={{
-                  background: isClicked ? Colors.Secondary : 'white',
-                  color: isClicked ? 'white' : Colors.Secondary,
+                  background: tagStates.includes(tag) ? Colors.Secondary : 'white',
+                  color: tagStates.includes(tag) ? 'white' : Colors.Secondary,
                 }}
               >
-                #{tagNames[index]}
+                #{tag}
               </S.Tag>
             ))}
           </S.TagList>
@@ -56,8 +78,7 @@ const QuestionPost: React.FC<Props> = (props) => {
           <PrimaryButton
             label="Inspect"
             onClick={() => {
-              console.log('TODO');
-              onClose();
+              postNewQuestion();
             }}
           />
         </div>

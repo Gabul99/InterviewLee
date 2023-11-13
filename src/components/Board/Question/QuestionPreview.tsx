@@ -1,6 +1,9 @@
+import { useEffect, useState } from 'react';
 import { Question } from '../../../models/Board/Question';
 import PrimaryButton from '../../Common/Button/PrimaryButton';
 import * as S from './QuestionPreview.style';
+import { Answer } from '../../../models/Board/Answer';
+import { getAnswerByQuestionId } from '../../../repository/Answer';
 
 interface QuestionWrapperProps {
   question: Question;
@@ -9,16 +12,21 @@ interface QuestionWrapperProps {
 }
 
 const QuestionWrapper: React.FC<QuestionWrapperProps> = ({ question, onClick, focused }: QuestionWrapperProps) => {
-  const { description, answers, tags } = question;
+  const [answers, setAnswers] = useState<Answer[]>([]);
+  const { question: questionValue, tags } = question;
+
+  useEffect(() => {
+    getAnswerByQuestionId(question.id).then((data) => setAnswers(data ?? []));
+  }, [question.id]);
 
   return (
     <S.Container onClick={(e) => onClick?.(e)}>
       <h2>Q:</h2>
       <S.QuestionContentWrapper>
         {tags.map((tag) => (
-          <S.TagWrapper key={tag.name}>{`#${tag.name}`}</S.TagWrapper>
+          <S.TagWrapper key={tag}>{`#${tag}`}</S.TagWrapper>
         ))}
-        <p>{description}</p>
+        <p>{questionValue}</p>
         <span>{answers.length ? `${answers.length.toLocaleString()} people have responded` : ''}</span>
       </S.QuestionContentWrapper>
       {!focused && (

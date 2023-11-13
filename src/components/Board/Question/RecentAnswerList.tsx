@@ -15,7 +15,7 @@ interface Props {
 const RecentAnswerList: React.FC<Props> = ({ id, answers }) => {
   const { profile } = useAuthContext();
 
-  const anonymousAnswers = answers.filter((answer) => answer.author.id !== profile.id);
+  const anonymousAnswers = answers.filter((answer) => answer.authorId !== profile.id);
 
   return (
     <S.Container>

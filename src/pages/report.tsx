@@ -1,9 +1,11 @@
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 import ListItem from '../components/Report/ListItem';
 import * as S from './report.style';
 import ReportDetail from '../components/Report/ReportDetail';
 import { useSearchParams } from 'react-router-dom';
-import { mockQuestions } from '../api/mocks/question.mock';
+import { useAuthContext } from '../context/Auth';
+import { getAIReportsByUserId } from '../repository/AIReport';
+import { AIReport } from '../models/AIReport';
 
 const mockList = [
   {
@@ -11,16 +13,6 @@ const mockList = [
     question: 'Why do you apply this company?',
   },
 ];
-
-export interface AIReport {
-  id: ID;
-  question: string;
-  answer: string;
-  clarity: number;
-  uniqueness: number;
-  depth: number;
-  follow_up: number;
-}
 
 const AIReportList: AIReport[] = [
   {
@@ -31,6 +23,8 @@ const AIReportList: AIReport[] = [
      * 아래 첨부한 mockQuestions 를 참고해주세요 @gabul
      * @see {mockQuestions}
      * */
+    questionId: '0',
+    answerId: '0',
     question: 'Why do you apply this company?',
     answer: 'Gain money, what else.',
     clarity: 70,
@@ -42,12 +36,27 @@ const AIReportList: AIReport[] = [
 
 const Report: React.FC = () => {
   const [searchParams] = useSearchParams();
+  const { profile } = useAuthContext();
 
   const defaultQuestionId = searchParams.get('questionId') ?? null;
   const defaultAnswerId = searchParams.get('answerId') ?? null;
+  const [reports, setReports] = useState<AIReport[]>([]);
 
   const [selectedId, setSelectedId] = useState<Nullable<ID>>(defaultQuestionId);
-  const selectedReport = selectedId === null ? null : AIReportList.filter((i) => i.id === selectedId)[0] ?? null;
+  const selectedReport = selectedId === null ? null : reports.filter((i) => i.id === selectedId)[0] ?? null;
+
+  useEffect(() => {
+    getAIReportsByUserId(profile.id).then((data) => {
+      setReports(data ?? []);
+    });
+  }, [profile.id]);
+
+  useEffect(() => {
+    if (!reports || !defaultAnswerId || !defaultQuestionId) return;
+    const defaultReport = reports.filter((report) => report.questionId === defaultQuestionId && report.answerId === defaultAnswerId)[0] ?? undefined;
+    if (defaultReport === undefined) return;
+    setSelectedId(defaultReport.id ?? null);
+  }, [reports, defaultQuestionId, defaultAnswerId]);
 
   return (
     <S.Container>
@@ -55,8 +64,8 @@ const Report: React.FC = () => {
       <S.Body>
         <S.LeftListArea>
           <h2 className="title">List</h2>
-          {mockQuestions.map((i) => (
-            <ListItem key={i.id} selected={selectedId === i.id} question={i.title} onClick={() => setSelectedId(i.id)} />
+          {reports.map((report) => (
+            <ListItem key={report.id} selected={selectedId === report.id} question={report.question} onClick={() => setSelectedId(report.id)} />
           ))}
         </S.LeftListArea>
         <S.Contents>

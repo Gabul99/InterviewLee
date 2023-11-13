@@ -1,12 +1,18 @@
-import { useState } from 'react';
-import { mockQuestions } from '../../api/mocks/question.mock';
+import { useEffect, useState } from 'react';
 import PrimaryButton from '../Common/Button/PrimaryButton';
 import QuestionContainer from './Question/Container';
 import * as S from './QuestionList.style';
 import QuestionPost from './QuestionPost';
+import { getQuestions } from '../../repository/Question';
+import { Question } from '../../models/Board/Question';
 
 const QuestionList: React.FC = () => {
+  const [questions, setQuestions] = useState<Question[]>([]);
   const [postQuestionModalOpen, setPostQuestionModalOpen] = useState(false);
+
+  useEffect(() => {
+    getQuestions().then((data) => setQuestions(data ?? []));
+  }, []);
 
   return (
     <>
@@ -22,7 +28,7 @@ const QuestionList: React.FC = () => {
       {postQuestionModalOpen && <QuestionPost onClose={() => setPostQuestionModalOpen(false)} />}
       {!postQuestionModalOpen && (
         <S.QuestionWrapper>
-          {mockQuestions.map((question) => (
+          {questions.map((question) => (
             <QuestionContainer key={question.id} question={question} />
           ))}
         </S.QuestionWrapper>

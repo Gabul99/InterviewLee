@@ -1,51 +1,59 @@
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 import PrimaryButton from '../../Common/Button/PrimaryButton';
 import * as S from './AnswerInput.style';
 import { useQuestionContext } from '../../../context/Question';
 import { Question } from '../../../models/Board/Question';
 import { Answer } from '../../../models/Board/Answer';
 import { useAuthContext } from '../../../context/Auth';
+import { v4 } from 'uuid';
+import { addAnswer } from '../../../repository/Answer';
+import { createAIReport } from '../../../repository/AIReport';
 
 interface Props {
-  id: Question['id'];
+  question: Question;
+  myAnswer?: Answer;
+  refresh: () => void;
 }
 
 const AnswerInput: React.FC<Props> = (props) => {
-  const { id: questionId } = props;
+  const { question, myAnswer, refresh } = props;
 
   const { setSelectedQuestionId, setSelectedAnswerId } = useQuestionContext();
   const { profile } = useAuthContext();
 
   const [value, setValue] = useState('');
-  const [confirmed, setConfirmed] = useState(false);
 
-  const uploadAnswer = async () => {
-    const data: Omit<Answer, 'id'> = {
-      author: profile,
+  useEffect(() => {
+    if (!!myAnswer) setValue(myAnswer.description);
+  }, [myAnswer]);
+
+  const handleSubmit = async () => {
+    if (value === '') return;
+    const newAnswer: Answer = {
+      id: v4(),
+      questionId: question.id,
+      authorId: profile.id,
       description: value,
       rating: -1,
     };
-  };
-
-  // TODO: Firebase 연결
-  const handleSubmit = async () => {
-    const res = await uploadAnswer();
-
-    setSelectedQuestionId(questionId);
-    // TODO: res.id 로 변경
-    setSelectedAnswerId('1');
+    await addAnswer(newAnswer);
+    setSelectedQuestionId(question.id);
+    setSelectedAnswerId(newAnswer.id);
+    await createAIReport(profile.id, question, newAnswer);
+    refresh();
   };
 
   return (
     <S.Container>
       <h2>A:</h2>
-      <S.Textarea value={value} onChange={(e) => setValue(e.target.value)} placeholder="Write your answer!" disabled={confirmed} confirmed={confirmed} />
+      <S.Textarea value={value} onChange={(e) => setValue(e.target.value)} placeholder="Write your answer!" disabled={!!myAnswer} confirmed={!!myAnswer} />
       <PrimaryButton
         style={{ alignSelf: 'flex-end' }}
-        label={confirmed ? 'Request Feedback' : 'Answer!'}
+        label={!!myAnswer ? 'Request Feedback' : 'Answer!'}
         onClick={() => {
-          if (!confirmed) {
-            setConfirmed(true);
+          if (myAnswer) {
+            setSelectedQuestionId(question.id);
+            setSelectedAnswerId(myAnswer.id);
           } else {
             handleSubmit();
           }

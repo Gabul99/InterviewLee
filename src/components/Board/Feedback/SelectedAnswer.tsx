@@ -1,6 +1,8 @@
+import { v4 } from 'uuid';
 import { useAuthContext } from '../../../context/Auth';
 import { Answer } from '../../../models/Board/Answer';
 import { Comment as CommentModel, SubComment } from '../../../models/Board/Comment';
+import { addComment, addSubComment, getCommentsByAnswerId } from '../../../repository/Comment';
 import ProfileIcon from '../../Common/Icons/ProfileIcon';
 import ExistComment from './ExistComment';
 import NewComment from './NewComment';
@@ -21,18 +23,18 @@ const SelectedAnswer: React.FC<Props> = (props) => {
 
   const { profile } = useAuthContext();
 
-  const name = profile.id === answer.author.id ? 'You' : 'Anonymous';
+  const name = profile.id === answer.authorId ? 'You' : 'Anonymous';
+
+  useEffect(() => {
+    refresh();
+  }, [answer]);
+
+  const refresh = () => {
+    getCommentsByAnswerId(answer.id).then((data) => setComments(data ?? []));
+  };
 
   const postSubComment = (commentId: string, subComment: SubComment) => {
-    setComments(
-      comments.map((comment) => {
-        if (comment.id !== commentId) return comment;
-        return {
-          ...comment,
-          subComments: [...comment.subComments, subComment],
-        };
-      }),
-    );
+    addSubComment(commentId, subComment).then(() => refresh());
   };
 
   const highlight = (idx: number) => {
@@ -42,7 +44,8 @@ const SelectedAnswer: React.FC<Props> = (props) => {
       if (idx >= min && idx <= max) return 'yellow-selected';
     }
     if (selectedCommentId) {
-      const selected = comments.filter((com) => com.id === selectedCommentId)[0];
+      const selected = comments?.filter((com) => com.id === selectedCommentId)[0] ?? undefined;
+      if (!selected) return '';
       const min = Math.min(selected.startIndex, selected.lastIndex);
       const max = Math.max(selected.startIndex, selected.lastIndex);
       if (idx >= min && idx <= max) return 'yellow-selected';
@@ -92,9 +95,9 @@ const SelectedAnswer: React.FC<Props> = (props) => {
                 onMouseUp={() => {
                   if (anchorIndex && lastIndex) {
                     setTempComment({
-                      id: `${comments.length + 1}`,
-                      authorId: 'you',
-                      answerId: 'abc',
+                      id: v4(),
+                      authorId: profile.id,
+                      answerId: answer.id,
                       startIndex: anchorIndex,
                       lastIndex: lastIndex,
                       comment: '',
@@ -111,29 +114,32 @@ const SelectedAnswer: React.FC<Props> = (props) => {
           </p>
         </S.AnswerWrapper>
         <S.CommentWrapper>
-          {comments
-            .sort((a, b) => a.startIndex - b.startIndex)
-            .map((comment, idx) => {
-              return (
-                <ExistComment
-                  key={idx}
-                  data={comment}
-                  selected={selectedCommentId === comment.id}
-                  onSelect={() => {
-                    setSelectedCommentId(comment.id);
-                    setTempComment(null);
-                  }}
-                  onSubComment={(subComment: SubComment) => postSubComment(comment.id, subComment)}
-                />
-              );
-            })}
+          {comments &&
+            comments
+              .sort((a, b) => a.startIndex - b.startIndex)
+              .map((comment, idx) => {
+                return (
+                  <ExistComment
+                    key={idx}
+                    data={comment}
+                    selected={selectedCommentId === comment.id}
+                    onSelect={() => {
+                      setSelectedCommentId(comment.id);
+                      setTempComment(null);
+                    }}
+                    onSubComment={(subComment: SubComment) => postSubComment(comment.id, subComment)}
+                  />
+                );
+              })}
           {tempComment !== null && (
             <NewComment
               data={tempComment}
               onSubmit={(value: string) => {
-                setComments([...comments, { ...tempComment, comment: value }]);
-                setTempComment(null);
-                setSelectedCommentId(tempComment.id);
+                addComment({ ...tempComment, comment: value }).then(() => {
+                  setTempComment(null);
+                  setSelectedCommentId(tempComment.id);
+                  refresh();
+                });
               }}
             />
           )}

@@ -1,15 +1,25 @@
+import { useEffect, useState } from 'react';
 import { mockQuestions } from '../../../api/mocks/question.mock';
 import { useQuestionContext } from '../../../context/Question';
 import Evaluation from './Evaluation';
 import * as S from './index.style';
 import SelectedAnswer from './SelectedAnswer';
 import SelectedQuestion from './SelectedQuestion';
+import { Question } from '../../../models/Board/Question';
+import { getAnswerById } from '../../../repository/Answer';
+import { getQuestionById } from '../../../repository/Question';
+import { Answer } from '../../../models/Board/Answer';
 
 const Feedback: React.FC = () => {
+  const [question, setQuestipn] = useState<Question>();
+  const [answer, setAnswer] = useState<Answer>();
   const { selectedQuestionId, selectedAnswerId } = useQuestionContext();
 
-  const question = mockQuestions.find((question) => question.id === selectedQuestionId);
-  const answer = question ? question.answers.find((answer) => answer.id === selectedAnswerId) : null;
+  useEffect(() => {
+    if (!selectedAnswerId || !selectedQuestionId) return;
+    getAnswerById(selectedAnswerId).then((data) => setAnswer(data));
+    getQuestionById(selectedQuestionId).then((data) => setQuestipn(data));
+  }, [selectedAnswerId, selectedQuestionId]);
 
   if (!question) return null;
 
@@ -19,7 +29,7 @@ const Feedback: React.FC = () => {
       {answer && (
         <>
           <SelectedAnswer answer={answer} />
-          <Evaluation />
+          <Evaluation answer={answer} />
         </>
       )}
     </S.Container>
