@@ -74,6 +74,7 @@ export const ProfileActvities = styled.div`
   display: flex;
   flex-direction: column;
 
+  width: 300px;
   padding: 8px 16px;
   border-radius: 5px;
   background: rgba(255, 232, 103, 0.3);

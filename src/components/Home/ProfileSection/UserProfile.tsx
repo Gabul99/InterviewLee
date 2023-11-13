@@ -1,23 +1,26 @@
 import * as S from './UserProfile.style';
 import TestImage from '../../../assets/profile.png';
+import { useAuthContext } from '../../../context/Auth';
 
 const UserProfile: React.FC = () => {
+  const { profile } = useAuthContext();
+
   return (
     <S.Container>
       <S.ProfileImageContainer>
         <S.ProfileImage src={TestImage} />
       </S.ProfileImageContainer>
       <S.ProfileContent>
-        <h2 className="name">Jaehee Lee</h2>
-        <p className="user-id">User 123456</p>
+        <h2 className="name">{profile.name}</h2>
+        <p className="user-id">{`User ID: ${profile.id}`}</p>
         <S.ProfileActvities>
           <div className="row">
             <span>No. of Responses:</span>
-            <span>15</span>
+            <span>{profile.question_no}</span>
           </div>
           <div className="row">
             <span>No. of Questions:</span>
-            <span>15</span>
+            <span>{profile.response_no}</span>
           </div>
         </S.ProfileActvities>
       </S.ProfileContent>
