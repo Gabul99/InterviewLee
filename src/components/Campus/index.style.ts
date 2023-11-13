@@ -6,6 +6,6 @@ export const Container = styled.div`
   justify-content: space-between;
 
   width: 100%;
-  height: 500px;
+  height: 100%;
   gap: 50px;
 `;
