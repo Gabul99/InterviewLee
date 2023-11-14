@@ -15,10 +15,9 @@ const Evaluation: React.FC<Props> = ({ answer }: Props) => {
   const { push } = useRouter();
   const [report, setReport] = useState<AIReport>();
   const { selectedQuestionId, selectedAnswerId } = useQuestionContext();
-  const { profile } = useAuthContext();
 
   useEffect(() => {
-    getAIReportsByAnswerId(profile.id, answer.id).then((data) => setReport(data));
+    getAIReportsByAnswerId(answer.id).then((data) => setReport(data));
   }, []);
 
   const navigateReport = () => {

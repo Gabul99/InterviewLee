@@ -15,8 +15,8 @@ export const getAIReportsByUserId = async (id: ID) => {
   return target;
 };
 
-export const getAIReportsByAnswerId = async (userId: ID, answerId: ID) => {
-  const reports = await getAIReportsByUserId(userId);
+export const getAIReportsByAnswerId = async (answerId: ID) => {
+  const reports = await getAIReports();
   const target = reports?.filter((r: any) => r.answerId === answerId)[0] ?? undefined;
   return target;
 };

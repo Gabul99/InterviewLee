@@ -136,7 +136,7 @@ const SelectedAnswer: React.FC<Props> = (props) => {
           {tempComment !== null && (
             <NewComment
               data={tempComment}
-              question={question}
+              answer={answer}
               onSubmit={(value: string) => {
                 addComment({ ...tempComment, comment: value }).then(() => {
                   setTempComment(null);
