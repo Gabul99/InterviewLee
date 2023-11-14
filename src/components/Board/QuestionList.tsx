@@ -11,9 +11,7 @@ const QuestionList: React.FC = () => {
   const [postQuestionModalOpen, setPostQuestionModalOpen] = useState(false);
 
   const handleClosePostModal = () => {
-    if (window.confirm('Your campus will get 5 points!')) {
-      setPostQuestionModalOpen(false);
-    }
+    setPostQuestionModalOpen(false);
   };
 
   // NOTE: 질문 생성 모달의 노출 여부에 따라서도 subscribe 해야함

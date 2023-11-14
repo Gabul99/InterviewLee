@@ -8,6 +8,8 @@ import { useAuthContext } from '../../../context/Auth';
 import { v4 } from 'uuid';
 import { addAnswer } from '../../../repository/Answer';
 import { createAIReport } from '../../../repository/AIReport';
+import { toast } from 'react-toastify';
+import LinkToast from '../../Toast/LinkToast';
 
 interface Props {
   question: Question;
@@ -27,12 +29,6 @@ const AnswerInput: React.FC<Props> = (props) => {
     if (!!myAnswer) setValue(myAnswer.description);
   }, [myAnswer]);
 
-  const postAnswer = async () => {
-    if (window.confirm('Your campus will get 5 points!')) {
-      await handleSubmit();
-    }
-  };
-
   const handleSubmit = async () => {
     if (value === '') return;
     const newAnswer: Answer = {
@@ -45,8 +41,13 @@ const AnswerInput: React.FC<Props> = (props) => {
     await addAnswer(newAnswer);
     setSelectedQuestionId(question.id);
     setSelectedAnswerId(newAnswer.id);
+    showToast();
     await createAIReport(profile.id, question, newAnswer);
     refresh();
+  };
+
+  const showToast = () => {
+    toast(<LinkToast text={'Nice answer! +10 pts to your university'} />);
   };
 
   return (
@@ -61,7 +62,7 @@ const AnswerInput: React.FC<Props> = (props) => {
             setSelectedQuestionId(question.id);
             setSelectedAnswerId(myAnswer.id);
           } else {
-            postAnswer();
+            handleSubmit();
           }
         }}
         disabled={value.trim().length === 0}
