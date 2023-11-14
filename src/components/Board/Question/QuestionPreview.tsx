@@ -4,6 +4,7 @@ import PrimaryButton from '../../Common/Button/PrimaryButton';
 import * as S from './QuestionPreview.style';
 import { Answer } from '../../../models/Board/Answer';
 import { getAnswerByQuestionId } from '../../../repository/Answer';
+import RatingButton from '../../Common/Button/RatingButton';
 
 interface QuestionWrapperProps {
   question: Question;
@@ -14,6 +15,12 @@ interface QuestionWrapperProps {
 const QuestionWrapper: React.FC<QuestionWrapperProps> = ({ question, onClick, focused }: QuestionWrapperProps) => {
   const [answers, setAnswers] = useState<Answer[]>([]);
   const { question: questionValue, tags } = question;
+
+  const handleRatingClick = (e: React.MouseEvent<HTMLDivElement, MouseEvent>) => {
+    // NOTE: 부모 컴포넌트에 이미 onClick 달려있음
+    e.stopPropagation();
+    window.alert('Rating feature will be added soon!');
+  };
 
   useEffect(() => {
     getAnswerByQuestionId(question.id).then((data) => setAnswers(data ?? []));
@@ -32,13 +39,16 @@ const QuestionWrapper: React.FC<QuestionWrapperProps> = ({ question, onClick, fo
         <span>{answers.length ? `${answers.length.toLocaleString()} people have responded` : ''}</span>
       </S.QuestionContentWrapper>
       {!focused && (
-        <PrimaryButton
-          style={{ alignSelf: 'flex-end' }}
-          label="Answer!"
-          onClick={() => {
-            console.log('TODO');
-          }}
-        />
+        <S.ButtonWrapper>
+          <RatingButton onClick={(e) => handleRatingClick(e)} />
+          <PrimaryButton
+            style={{ alignSelf: 'flex-end' }}
+            label="Answer!"
+            onClick={() => {
+              console.log('TODO');
+            }}
+          />
+        </S.ButtonWrapper>
       )}
     </S.Container>
   );

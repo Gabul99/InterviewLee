@@ -20,3 +20,11 @@ export const ButtonWrapper = styled.button<{ background: string }>`
 
   cursor: pointer;
 `;
+
+export const RatingButtonContainer = styled.div`
+  display: flex;
+  justify-content: flex-end;
+  align-items: center;
+
+  cursor: pointer;
+`;

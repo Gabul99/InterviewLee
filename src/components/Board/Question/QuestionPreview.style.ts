@@ -32,6 +32,15 @@ export const QuestionContentWrapper = styled.div`
   }
 `;
 
+export const ButtonWrapper = styled.div`
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  align-items: flex-end;
+
+  height: 100%;
+`;
+
 export const TagContainer = styled.div`
   display: flex;
   flex-direction: row;
