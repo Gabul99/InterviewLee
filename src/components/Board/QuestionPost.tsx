@@ -6,6 +6,8 @@ import { v4 } from 'uuid';
 import { Question } from '../../models/Board/Question';
 import { useAuthContext } from '../../context/Auth';
 import { addQuestion } from '../../repository/Question';
+import { toast } from 'react-toastify';
+import LinkToast from '../Toast/LinkToast';
 
 interface Props {
   onClose: () => void;
@@ -42,10 +44,14 @@ const QuestionPost: React.FC<Props> = (props) => {
     });
   };
 
+  const showToast = () => {
+    toast(<LinkToast text={'Nice question! +10 pts to your university'} />);
+  };
+
   return (
     <S.Container>
       <S.Description>
-        <h3>Write a Question</h3>
+        <h3 onClick={() => showToast()}>Write a Question</h3>
         <div className="description">
           InterviewLee’s exclusive inspection process will check whether your question is both distinct from those already posted on the Question Board and
           meets the criteria of language appropriateness and relevance to job interviews. We strive to offer a valuable and user-friendly experience for all
