@@ -40,6 +40,7 @@ const QuestionPost: React.FC<Props> = (props) => {
       tags: tagStates,
     };
     addQuestion(newQuestion).then(() => {
+      showToast();
       onClose();
     });
   };
@@ -51,7 +52,7 @@ const QuestionPost: React.FC<Props> = (props) => {
   return (
     <S.Container>
       <S.Description>
-        <h3 onClick={() => showToast()}>Write a Question</h3>
+        <h3>Write a Question</h3>
         <div className="description">
           InterviewLee’s exclusive inspection process will check whether your question is both distinct from those already posted on the Question Board and
           meets the criteria of language appropriateness and relevance to job interviews. We strive to offer a valuable and user-friendly experience for all
