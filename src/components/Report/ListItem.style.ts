@@ -8,8 +8,17 @@ export const Container = styled.div`
   border-radius: 8px;
   background-color: ${Colors.Tertiary};
   cursor: pointer;
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
 
   &.selected {
     border: 1px solid black;
   }
+`;
+
+export const Score = styled.div`
+  display: flex;
+  flex-direction: row;
+  font-weight: 500;
 `;

@@ -1,15 +1,18 @@
+import { AIReport, getReportAvg } from '../../models/AIReport';
 import * as S from './ListItem.style';
 
 interface Props {
   selected: boolean;
-  question: string;
+  report: AIReport;
   onClick: () => void;
 }
 
-const ListItem: React.FC<Props> = ({ selected, question, onClick }: Props) => {
+const ListItem: React.FC<Props> = ({ selected, report, onClick }: Props) => {
   return (
     <S.Container className={selected ? 'selected' : ''} onClick={onClick}>
-      Q: {question}
+      <div>Q: {report.question}</div>
+      <div>A: {report.answer.slice(0, 30) + (report.answer.length > 30 ? '...' : '')}</div>
+      <S.Score>AI Score Avg: {getReportAvg(report)}</S.Score>
     </S.Container>
   );
 };

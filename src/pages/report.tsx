@@ -63,9 +63,9 @@ const Report: React.FC = () => {
       <S.Header>Reports</S.Header>
       <S.Body>
         <S.LeftListArea>
-          <h2 className="title">List</h2>
+          <h2 className="title">Reports for My Answers</h2>
           {reports.map((report) => (
-            <ListItem key={report.id} selected={selectedId === report.id} question={report.question} onClick={() => setSelectedId(report.id)} />
+            <ListItem key={report.id} selected={selectedId === report.id} report={report} onClick={() => setSelectedId(report.id)} />
           ))}
         </S.LeftListArea>
         <S.Contents>

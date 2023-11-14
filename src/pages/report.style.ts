@@ -45,7 +45,7 @@ export const LeftListArea = styled.div`
   overflow-y: auto;
 
   .title {
-    font-size: 32px;
+    font-size: 24px;
     font-weight: 500;
   }
 `;
