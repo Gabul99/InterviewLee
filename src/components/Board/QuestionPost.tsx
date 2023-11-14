@@ -6,6 +6,8 @@ import { v4 } from 'uuid';
 import { Question } from '../../models/Board/Question';
 import { useAuthContext } from '../../context/Auth';
 import { addQuestion } from '../../repository/Question';
+import { toast } from 'react-toastify';
+import LinkToast from '../Toast/LinkToast';
 
 interface Props {
   onClose: () => void;
@@ -38,8 +40,13 @@ const QuestionPost: React.FC<Props> = (props) => {
       tags: tagStates,
     };
     addQuestion(newQuestion).then(() => {
+      showToast();
       onClose();
     });
+  };
+
+  const showToast = () => {
+    toast(<LinkToast text={'Nice question! +10 pts to your university'} />);
   };
 
   return (
