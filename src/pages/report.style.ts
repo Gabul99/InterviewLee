@@ -59,6 +59,7 @@ export const Contents = styled.div`
   padding: 32px;
   gap: 16px;
   overflow-y: auto;
+  flex-basis: 0;
 
   background-color: ${Colors.Tertiary};
 

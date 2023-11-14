@@ -8,7 +8,7 @@ interface QuestionWrapperProps {
 }
 
 const SelectedQuestion: React.FC<QuestionWrapperProps> = ({ question, onClick }: QuestionWrapperProps) => {
-  const { selectedQuestionId, setSelectedQuestionId } = useQuestionContext();
+  const { selectedQuestionId, setSelectedQuestionId, setSelectedAnswerId } = useQuestionContext();
 
   const { question: questionValue, tags } = question;
 
@@ -23,7 +23,13 @@ const SelectedQuestion: React.FC<QuestionWrapperProps> = ({ question, onClick }:
           <p>{questionValue}</p>
         </S.QuestionDescriptionWrapper>
         {selectedQuestionId && (
-          <div style={{ alignSelf: 'flex-end' }} onClick={() => setSelectedQuestionId(null)}>
+          <div
+            style={{ alignSelf: 'flex-end' }}
+            onClick={() => {
+              setSelectedQuestionId(null);
+              setSelectedAnswerId(null);
+            }}
+          >
             <CancelButton />
           </div>
         )}

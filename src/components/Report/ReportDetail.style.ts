@@ -140,10 +140,21 @@ export const OtherAnswerContainer = styled.div`
     display: flex;
     flex-direction: column;
   }
+
+  .empty-desc {
+    width: 100%;
+    padding: 24px 0px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    color: rgba(0, 0, 0, 0.6);
+    font-size: 12px;
+  }
 `;
 
 export const OtherAnswerItem = styled.div`
   width: 100%;
+  min-width: 0;
   height: 64px;
   display: flex;
   flex-direction: row;
@@ -167,11 +178,22 @@ export const OtherAnswerItem = styled.div`
       font-weight: 500;
       color: ${Colors.Green};
     }
+
+    span.yellow {
+      font-size: 16px;
+      font-weight: 500;
+      color: #ebd661;
+    }
+
+    span.red {
+      font-size: 16px;
+      font-weight: 500;
+      color: #ff0000;
+    }
   }
 
-  p.answer {
-    flex-grow: 1;
-    min-width: 0;
+  div.answer {
+    width: 40vw;
     text-overflow: ellipsis;
     overflow: hidden;
     white-space: nowrap;

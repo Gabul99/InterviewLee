@@ -9,3 +9,7 @@ export interface AIReport {
   depth: number;
   follow_up: number;
 }
+
+export function getReportAvg(report: AIReport) {
+  return (report.clarity + report.depth + report.uniqueness + report.follow_up) / 4;
+}

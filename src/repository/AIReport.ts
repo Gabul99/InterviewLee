@@ -1,6 +1,6 @@
 import { v4 } from 'uuid';
 import { getDBData, setDBData } from '../firebase/Firebase';
-import { AIReport } from '../models/AIReport';
+import { AIReport, getReportAvg } from '../models/AIReport';
 import { Answer } from '../models/Board/Answer';
 import { Question } from '../models/Board/Question';
 
@@ -50,4 +50,32 @@ export const createAIReport = async (userId: string, question: Question, answer:
     follow_up: getRandomNumber(),
   };
   await addReport(newReport);
+};
+
+export const getTopAIReportsByQuestionId = async (questionId: ID) => {
+  const reports = await getAIReports();
+  const topReportsForQuestion = reports.filter((report: AIReport) => report.questionId === questionId).slice(0, 3);
+  return topReportsForQuestion;
+};
+
+export const getSimilarRatedReport = async (report: AIReport) => {
+  function findClosestObject(targetObject: AIReport, array: AIReport[]): AIReport | null {
+    const reportsExceptTarget = array.filter((item) => item.id !== report.id);
+    if (reportsExceptTarget.length === 0) {
+      return null;
+    }
+
+    const closestObject = reportsExceptTarget.reduce((prev, current) => {
+      const prevDiff = Math.abs(getReportAvg(prev) - getReportAvg(targetObject));
+      const currentDiff = Math.abs(getReportAvg(current) - getReportAvg(targetObject));
+
+      return currentDiff < prevDiff ? current : prev;
+    });
+
+    return closestObject;
+  }
+
+  const reports = await getAIReports();
+  const reportsInSameQuestions = reports.filter((rep: AIReport) => rep.questionId === report.questionId);
+  return findClosestObject(report, reportsInSameQuestions);
 };
