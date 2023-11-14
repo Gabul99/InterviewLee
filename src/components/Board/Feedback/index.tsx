@@ -28,7 +28,7 @@ const Feedback: React.FC = () => {
       <SelectedQuestion question={question} />
       {answer && (
         <>
-          <SelectedAnswer answer={answer} />
+          <SelectedAnswer answer={answer} question={question} />
           <Evaluation answer={answer} />
         </>
       )}

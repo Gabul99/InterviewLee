@@ -8,9 +8,11 @@ import ExistComment from './ExistComment';
 import NewComment from './NewComment';
 import * as S from './SelectedAnswer.style';
 import React, { useEffect, useState } from 'react';
+import { Question } from '../../../models/Board/Question';
 
 interface Props {
   answer: Answer;
+  question: Question;
 }
 
 const SelectedAnswer: React.FC<Props> = (props) => {
@@ -19,7 +21,7 @@ const SelectedAnswer: React.FC<Props> = (props) => {
   const [lastIndex, setLastIndex] = useState<number | null>(null);
   const [tempComment, setTempComment] = useState<CommentModel | null>(null);
   const [selectedCommentId, setSelectedCommentId] = useState<string | null>(null);
-  const { answer } = props;
+  const { answer, question } = props;
 
   const { profile } = useAuthContext();
 
@@ -134,6 +136,7 @@ const SelectedAnswer: React.FC<Props> = (props) => {
           {tempComment !== null && (
             <NewComment
               data={tempComment}
+              question={question}
               onSubmit={(value: string) => {
                 addComment({ ...tempComment, comment: value }).then(() => {
                   setTempComment(null);

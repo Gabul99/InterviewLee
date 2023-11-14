@@ -3,6 +3,8 @@ import styled from 'styled-components';
 import { Colors } from '../../../styles/colors';
 import ProfileIcon from '../../Common/Icons/ProfileIcon';
 import { Comment as CommentModel } from '../../../models/Board/Comment';
+import { Question } from '../../../models/Board/Question';
+import { useAuthContext } from '../../../context/Auth';
 
 const Container = styled.div`
   width: 100%;
@@ -76,12 +78,15 @@ enum Status {
 
 interface Props {
   data: CommentModel;
+  question: Question;
   onSubmit: (value: string) => void;
 }
 
-const NewComment: React.FC<Props> = ({ data, onSubmit }: Props) => {
+const NewComment: React.FC<Props> = ({ data, question, onSubmit }: Props) => {
   const [status, setStatus] = useState<Status>(Status.INIT);
   const [tempValue, setTempValue] = useState<string>('');
+
+  const { profile } = useAuthContext();
 
   return (
     <Container>
@@ -90,7 +95,9 @@ const NewComment: React.FC<Props> = ({ data, onSubmit }: Props) => {
           <ProfileIcon />
           <p>You</p>
         </div>
-        {status === Status.INIT && <Button onClick={() => setStatus(Status.ADDING)}>Give Text Feedback</Button>}
+        {status === Status.INIT && (
+          <Button onClick={() => setStatus(Status.ADDING)}>{question.authorId === profile.id ? `Request Feedback` : `Give Text Feedback`}</Button>
+        )}
       </TitleArea>
       {status === Status.ADDING && (
         <>
