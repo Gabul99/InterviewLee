@@ -28,7 +28,7 @@ const Title = () => {
                     <li>Number of questions that made it to the Question Board</li>
                     <li>Quality ratings given with a 5-star quality assessment</li>
                     <li>Number of responses received for questions submitted</li>
-                    <li>Number of feedbacks left on other candidates&rsquo responses or feedback requests</li>
+                    <li>Number of feedbacks left on other candidates&apos; responses or feedback requests</li>
                   </p>
                 </S.HoverPopUpText>
               </S.HoverPopUp>
