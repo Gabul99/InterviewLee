@@ -9,7 +9,7 @@ export const CampusPopUp = styled.div`
   background: url(${CampusPopUpBackground}) no-repeat;
   background-size: auto 100%;
   background-position: center;
-  gap: 200px;
+  gap: 150px;
   height: 300px;
 `;
 
@@ -17,7 +17,7 @@ export const CampusPopUpLeft = styled.div`
   display: flex;
   flex-direction: column;
   gap: 15px;
-  margin-left: 100px;
+  margin-left: 150px;
 `;
 
 export const CampusLogoContainer = styled.div`

@@ -1,7 +1,10 @@
 import * as S from './CampusPopUp.style';
 import React, { useState } from 'react';
 import { Colors } from '../../../styles/colors';
-import KAIST_Icon from '../../../assets/KAIST.png';
+import KAIST from '../../../assets/KAIST.png';
+import MIT from '../../../assets/MIT.png';
+import SNU from '../../../assets/SNU.png';
+import university from '../../../assets/university.png';
 import { Campus } from '../../../models/Common/Campus';
 
 interface CampusPopUpProps {
@@ -9,12 +12,15 @@ interface CampusPopUpProps {
   style?: React.CSSProperties;
 }
 
+const CampusNames = [KAIST, MIT, SNU, university];
+
 const CampusPopUp: React.FC<CampusPopUpProps> = ({ campus, style }) => {
+  const logoIndex = campus.rank <= 3 ? campus.rank - 1 : CampusNames.indexOf(university);
   return (
     <S.CampusPopUp style={style}>
       <S.CampusPopUpLeft>
         <S.CampusLogoContainer>
-          <S.CampusLogo src={KAIST_Icon} />
+          <S.CampusLogo src={CampusNames[logoIndex]} alt={campus.campus} />
         </S.CampusLogoContainer>
         <S.CampusName>
           <h1>{campus.campus}</h1>
