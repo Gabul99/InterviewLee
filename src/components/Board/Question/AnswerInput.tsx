@@ -21,7 +21,7 @@ const AnswerInput: React.FC<Props> = (props) => {
   const { question, myAnswer, refresh } = props;
 
   const { setSelectedQuestionId, setSelectedAnswerId } = useQuestionContext();
-  const { profile } = useAuthContext();
+  const { profile, setLoginModalOpen } = useAuthContext();
 
   const [value, setValue] = useState('');
 
@@ -30,7 +30,11 @@ const AnswerInput: React.FC<Props> = (props) => {
   }, [myAnswer]);
 
   const handleSubmit = async () => {
-    if (value === '' || !profile) return;
+    if (!profile) {
+      setLoginModalOpen(true);
+      return;
+    }
+    if (value === '') return;
     const newAnswer: Answer = {
       id: v4(),
       questionId: question.id,

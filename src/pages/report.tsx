@@ -70,7 +70,14 @@ const Report: React.FC = () => {
           ))}
         </S.LeftListArea>
         <S.Contents>
-          {!selectedReport && (
+          {!profile && (
+            <div className="empty">
+              Please log-in to write answer
+              <br />
+              and check AI REPORTS!
+            </div>
+          )}
+          {profile && !selectedReport && (
             <div className="empty">
               Check the report about your answer
               <br />

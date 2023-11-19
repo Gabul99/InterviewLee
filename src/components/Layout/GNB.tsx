@@ -7,8 +7,7 @@ import { useState } from 'react';
 import LoginModal from '../Login/LoginModal';
 
 const GNB = () => {
-  const [isLoginModalOpen, setLoginModalOpen] = useState(false);
-  const { profile } = useAuthContext();
+  const { profile, isLoginModalOpen, setLoginModalOpen } = useAuthContext();
   const { pathname, push } = useRouter();
 
   const paths = ['/', '/board', '/report', '/campus'];
