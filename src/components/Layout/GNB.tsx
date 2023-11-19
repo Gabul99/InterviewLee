@@ -42,14 +42,16 @@ const GNB = () => {
         ))}
       </S.list>
       <S.ProfileWrapper>
-        {/* <S.Profile>
-          <img src={ProfileImage} alt="profile" />
-          <div className="content">
-            <span className="name">{profile.name}</span>
-            <span>{profile.campus}</span>
-          </div>
-        </S.Profile> */}
-        <S.LoginButton onClick={() => setLoginModalOpen(true)}>Login to Start</S.LoginButton>
+        {profile && (
+          <S.Profile>
+            <img src={ProfileImage} alt="profile" />
+            <div className="content">
+              <span className="name">{profile.name}</span>
+              <span>{profile.campus}</span>
+            </div>
+          </S.Profile>
+        )}
+        {!profile && <S.LoginButton onClick={() => setLoginModalOpen(true)}>Login to Start</S.LoginButton>}
         <p>2023 © InterviewLee</p>
       </S.ProfileWrapper>
       {isLoginModalOpen && <LoginModal onClose={() => setLoginModalOpen(false)} />}

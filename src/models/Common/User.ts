@@ -4,4 +4,5 @@ export interface User {
   campus: string;
   question_no: number;
   response_no: number;
+  prefer: string[];
 }
