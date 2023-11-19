@@ -30,7 +30,7 @@ const AnswerInput: React.FC<Props> = (props) => {
   }, [myAnswer]);
 
   const handleSubmit = async () => {
-    if (value === '') return;
+    if (value === '' || !profile) return;
     const newAnswer: Answer = {
       id: v4(),
       questionId: question.id,

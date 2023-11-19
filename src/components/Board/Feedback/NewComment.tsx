@@ -97,7 +97,7 @@ const NewComment: React.FC<Props> = ({ data, answer, onSubmit }: Props) => {
           <p>You</p>
         </div>
         {status === Status.INIT && (
-          <Button onClick={() => setStatus(Status.ADDING)}>{answer.authorId === profile.id ? `Request Feedback` : `Give Text Feedback`}</Button>
+          <Button onClick={() => setStatus(Status.ADDING)}>{answer.authorId === profile?.id ? `Request Feedback` : `Give Text Feedback`}</Button>
         )}
       </TitleArea>
       {status === Status.ADDING && (

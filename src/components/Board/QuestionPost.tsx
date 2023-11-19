@@ -27,7 +27,7 @@ const QuestionPost: React.FC<Props> = (props) => {
   };
 
   const postNewQuestion = () => {
-    if (value === '') {
+    if (value === '' || !profile) {
       window.alert('Please fill above input!');
       return;
     }

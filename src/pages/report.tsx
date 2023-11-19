@@ -46,10 +46,11 @@ const Report: React.FC = () => {
   const selectedReport = selectedId === null ? null : reports.filter((i) => i.id === selectedId)[0] ?? null;
 
   useEffect(() => {
+    if (!profile) return;
     getAIReportsByUserId(profile.id).then((data) => {
       setReports(data ?? []);
     });
-  }, [profile.id]);
+  }, [profile?.id]);
 
   useEffect(() => {
     if (!reports || !defaultAnswerId || !defaultQuestionId) return;

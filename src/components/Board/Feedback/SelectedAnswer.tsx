@@ -25,7 +25,7 @@ const SelectedAnswer: React.FC<Props> = (props) => {
 
   const { profile } = useAuthContext();
 
-  const name = profile.id === answer.authorId ? 'You' : 'Anonymous';
+  const name = profile?.id === answer.authorId ? 'You' : 'Anonymous';
 
   useEffect(() => {
     refresh();
@@ -95,7 +95,7 @@ const SelectedAnswer: React.FC<Props> = (props) => {
                   if (anchorIndex !== null) setLastIndex(idx);
                 }}
                 onMouseUp={() => {
-                  if (anchorIndex && lastIndex) {
+                  if (anchorIndex && lastIndex && profile) {
                     setTempComment({
                       id: v4(),
                       authorId: profile.id,

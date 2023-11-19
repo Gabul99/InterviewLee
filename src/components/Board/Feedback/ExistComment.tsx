@@ -94,7 +94,7 @@ const ExistComment: React.FC<Props> = ({ data, selected, onSelect, onSubComment 
       <TitleArea onClick={onSelect}>
         <div className={'profile'}>
           <ProfileIcon />
-          <p>{profile.id === data.authorId ? 'You' : data.authorId}</p>
+          <p>{profile?.id === data.authorId ? 'You' : data.authorId}</p>
         </div>
       </TitleArea>
       {selected && (
@@ -117,7 +117,7 @@ const ExistComment: React.FC<Props> = ({ data, selected, onSelect, onSubComment 
           <ButtonArea>
             <Button
               onClick={() => {
-                if (tempReply === '') return;
+                if (tempReply === '' || !profile) return;
                 onSubComment({
                   authorId: profile.id,
                   comment: tempReply,
@@ -171,7 +171,7 @@ const SubCommentUI = ({ data }: { data: SubComment }) => {
       <SubCommentProfile>
         <div className={'profile'}>
           <ProfileIcon />
-          <p>{profile.id === data.authorId ? 'You' : data.authorId}</p>
+          <p>{profile?.id === data.authorId ? 'You' : data.authorId}</p>
         </div>
       </SubCommentProfile>
       <Contents>{data.comment}</Contents>

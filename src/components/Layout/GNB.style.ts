@@ -135,3 +135,15 @@ export const Profile = styled.div`
     }
   }
 `;
+
+export const LoginButton = styled.div`
+  width: fit-content;
+  height: fit-content;
+  padding: 16px 24px;
+  background-color: ${Colors.Secondary};
+  border-radius: 8px;
+  cursor: pointer;
+  font-size: 16px;
+  font-weight: 500;
+  color: ${Colors.White};
+`;
