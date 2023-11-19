@@ -35,9 +35,14 @@ interface RecentAnswerProps {
 }
 
 const RecentAnswer: React.FC<RecentAnswerProps> = ({ id, answer }) => {
+  const { profile, setLoginModalOpen } = useAuthContext();
   const { setSelectedAnswerId, setSelectedQuestionId } = useQuestionContext();
 
   const handleClick = () => {
+    if (!profile) {
+      setLoginModalOpen(true);
+      return;
+    }
     setSelectedQuestionId(id);
     setSelectedAnswerId(answer.id);
   };
