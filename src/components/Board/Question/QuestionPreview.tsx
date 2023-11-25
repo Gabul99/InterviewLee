@@ -5,6 +5,7 @@ import * as S from './QuestionPreview.style';
 import { Answer } from '../../../models/Board/Answer';
 import { getAnswerByQuestionId } from '../../../repository/Answer';
 import RatingButton from '../../Common/Button/RatingButton';
+import { useAuthContext } from '../../../context/Auth';
 
 interface QuestionWrapperProps {
   question: Question;
@@ -14,11 +15,17 @@ interface QuestionWrapperProps {
 
 const QuestionWrapper: React.FC<QuestionWrapperProps> = ({ question, onClick, focused }: QuestionWrapperProps) => {
   const [answers, setAnswers] = useState<Answer[]>([]);
+  const { profile, setLoginModalOpen } = useAuthContext();
+
   const { question: questionValue, tags } = question;
 
   const handleRatingClick = (e: React.MouseEvent<HTMLDivElement, MouseEvent>) => {
     // NOTE: 부모 컴포넌트에 이미 onClick 달려있음
     e.stopPropagation();
+    if (!profile) {
+      setLoginModalOpen(true);
+      return;
+    }
     window.alert('Rating feature will be added soon!');
   };
 

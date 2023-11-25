@@ -5,8 +5,11 @@ import * as S from './QuestionList.style';
 import QuestionPost from './QuestionPost';
 import { getQuestions } from '../../repository/Question';
 import { Question } from '../../models/Board/Question';
+import { useAuthContext } from '../../context/Auth';
 
 const QuestionList: React.FC = () => {
+  const { profile, setLoginModalOpen } = useAuthContext();
+
   const [questions, setQuestions] = useState<Question[]>([]);
   const [postQuestionModalOpen, setPostQuestionModalOpen] = useState(false);
 
@@ -26,6 +29,10 @@ const QuestionList: React.FC = () => {
         <PrimaryButton
           label={postQuestionModalOpen ? 'Cancel' : 'Post Question'}
           onClick={() => {
+            if (!profile) {
+              setLoginModalOpen(true);
+              return;
+            }
             setPostQuestionModalOpen(!postQuestionModalOpen);
           }}
         />

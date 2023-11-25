@@ -6,4 +6,5 @@ export const mockProfile: User = {
   campus: 'Korea Advanced Institute of Science and Technology',
   question_no: 15,
   response_no: 15,
+  prefer: ['Software Engineer'],
 };

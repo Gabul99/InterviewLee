@@ -46,10 +46,11 @@ const Report: React.FC = () => {
   const selectedReport = selectedId === null ? null : reports.filter((i) => i.id === selectedId)[0] ?? null;
 
   useEffect(() => {
+    if (!profile) return;
     getAIReportsByUserId(profile.id).then((data) => {
       setReports(data ?? []);
     });
-  }, [profile.id]);
+  }, [profile?.id]);
 
   useEffect(() => {
     if (!reports || !defaultAnswerId || !defaultQuestionId) return;
@@ -69,7 +70,14 @@ const Report: React.FC = () => {
           ))}
         </S.LeftListArea>
         <S.Contents>
-          {!selectedReport && (
+          {!profile && (
+            <div className="empty">
+              Please log-in to write answer
+              <br />
+              and check AI REPORTS!
+            </div>
+          )}
+          {profile && !selectedReport && (
             <div className="empty">
               Check the report about your answer
               <br />

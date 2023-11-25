@@ -15,7 +15,7 @@ interface Props {
 const RecentAnswerList: React.FC<Props> = ({ id, answers }) => {
   const { profile } = useAuthContext();
 
-  const anonymousAnswers = answers.filter((answer) => answer.authorId !== profile.id);
+  const anonymousAnswers = answers.filter((answer) => answer.authorId !== profile?.id);
 
   return (
     <S.Container>
@@ -35,9 +35,14 @@ interface RecentAnswerProps {
 }
 
 const RecentAnswer: React.FC<RecentAnswerProps> = ({ id, answer }) => {
+  const { profile, setLoginModalOpen } = useAuthContext();
   const { setSelectedAnswerId, setSelectedQuestionId } = useQuestionContext();
 
   const handleClick = () => {
+    if (!profile) {
+      setLoginModalOpen(true);
+      return;
+    }
     setSelectedQuestionId(id);
     setSelectedAnswerId(answer.id);
   };

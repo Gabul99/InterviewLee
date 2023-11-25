@@ -21,7 +21,7 @@ const QuestionContainer: React.FC<Props> = (props) => {
   const [answers, setAnswers] = useState<Answer[]>([]);
   const [focused, setFocused] = useState(false);
 
-  const myAnswer = answers.filter((answer) => answer.authorId === profile.id)[0] ?? undefined;
+  const myAnswer = answers.filter((answer) => answer.authorId === profile?.id)[0] ?? undefined;
 
   useEffect(() => {
     refresh();

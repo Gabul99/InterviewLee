@@ -3,9 +3,11 @@ import * as S from './GNB.style';
 
 import ProfileImage from '../../assets/profile.png';
 import { useAuthContext } from '../../context/Auth';
+import { useState } from 'react';
+import LoginModal from '../Login/LoginModal';
 
 const GNB = () => {
-  const { profile } = useAuthContext();
+  const { profile, isLoginModalOpen, setLoginModalOpen } = useAuthContext();
   const { pathname, push } = useRouter();
 
   const paths = ['/', '/board', '/report', '/campus'];
@@ -39,15 +41,19 @@ const GNB = () => {
         ))}
       </S.list>
       <S.ProfileWrapper>
-        <S.Profile>
-          <img src={ProfileImage} alt="profile" />
-          <div className="content">
-            <span className="name">{profile.name}</span>
-            <span>{profile.campus}</span>
-          </div>
-        </S.Profile>
+        {profile && (
+          <S.Profile>
+            <img src={ProfileImage} alt="profile" />
+            <div className="content">
+              <span className="name">{profile.name}</span>
+              <span>{profile.campus}</span>
+            </div>
+          </S.Profile>
+        )}
+        {!profile && <S.LoginButton onClick={() => setLoginModalOpen(true)}>Login to Start</S.LoginButton>}
         <p>2023 © InterviewLee</p>
       </S.ProfileWrapper>
+      {isLoginModalOpen && <LoginModal onClose={() => setLoginModalOpen(false)} />}
     </S.main>
   );
 };
