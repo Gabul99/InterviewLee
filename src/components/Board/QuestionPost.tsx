@@ -98,4 +98,4 @@ const QuestionPost: React.FC<Props> = (props) => {
 
 export default QuestionPost;
 
-const tagNames = ['Culture Fit', 'Interview', 'Travel', 'Family', 'Ambition', 'Hobby', 'Spirit', 'Leadership'];
+export const tagNames = ['Culture Fit', 'Interview', 'Travel', 'Family', 'Ambition', 'Hobby', 'Spirit', 'Leadership'];

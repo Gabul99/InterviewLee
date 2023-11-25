@@ -27,3 +27,11 @@ export const QuestionWrapper = styled.div`
   display: flex;
   flex-direction: column;
 `;
+
+export const EmptyText = styled.p`
+  width: 100%;
+  text-align: center;
+  color: rgba(0, 0, 0, 0.6);
+  font-size: 16px;
+  font-weight: 500;
+`;
