@@ -25,7 +25,7 @@ export const Row = styled.div`
 
 export const PositionFilterItem = styled.div`
   width: fit-content;
-  padding: 2px 12px;
+  padding: 4px 12px;
   display: flex;
   flex-direction: row;
   justify-content: center;

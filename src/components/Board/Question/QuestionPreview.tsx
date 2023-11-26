@@ -6,6 +6,9 @@ import { Answer } from '../../../models/Board/Answer';
 import { getAnswerByQuestionId } from '../../../repository/Answer';
 import RatingButton from '../../Common/Button/RatingButton';
 import { useAuthContext } from '../../../context/Auth';
+import DataAnalyist from '../../../assets/data_analyist.svg';
+import Frontend from '../../../assets/frontend.svg';
+import Backend from '../../../assets/backend.svg';
 
 interface QuestionWrapperProps {
   question: Question;
@@ -35,19 +38,52 @@ const QuestionWrapper: React.FC<QuestionWrapperProps> = ({ question, onClick, fo
 
   return (
     <S.Container onClick={(e) => onClick?.(e)}>
-      <h2>Q:</h2>
+      <S.ImageWrapper>
+        {question.position === 'Data Analyist' && (
+          <>
+            <img src={DataAnalyist} />
+            <div className="position-name">
+              DATA
+              <br />
+              ANALYST
+            </div>
+          </>
+        )}
+        {question.position === 'Back-end' && (
+          <>
+            <img src={Backend} />
+            <div className="position-name">
+              BACK
+              <br />
+              END
+            </div>
+          </>
+        )}
+        {question.position === 'Front-end' && (
+          <>
+            <img src={Frontend} />
+            <div className="position-name">
+              FRONT
+              <br />
+              END
+            </div>
+          </>
+        )}
+      </S.ImageWrapper>
       <S.QuestionContentWrapper>
         <S.TagContainer>
           {tags.map((tag) => (
             <S.TagWrapper key={tag}>{`#${tag}`}</S.TagWrapper>
           ))}
         </S.TagContainer>
-        <p>{questionValue}</p>
-        <span>{answers.length ? `${answers.length.toLocaleString()} people have responded` : ''}</span>
+        <div className="content">
+          <p>{questionValue}</p>
+          <span>{answers.length ? `${answers.length.toLocaleString()} people have responded` : ''}</span>
+        </div>
       </S.QuestionContentWrapper>
       {!focused && (
         <S.ButtonWrapper>
-          <RatingButton onClick={(e) => handleRatingClick(e)} />
+          <RatingButton selected={false} onClick={(e) => handleRatingClick(e)} />
           <PrimaryButton
             style={{ alignSelf: 'flex-end' }}
             label="Answer!"

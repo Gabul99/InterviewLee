@@ -21,6 +21,9 @@ const QuestionList: React.FC = () => {
     if (tagFilters.length > 0) {
       result = result.filter((q) => q.tags.some((element) => tagFilters.includes(element)));
     }
+    if (positionFilters.length > 0) {
+      result = result.filter((q) => positionFilters.includes(q.position ?? ''));
+    }
     return result;
   }, [questions, tagFilters, positionFilters]);
 
@@ -48,7 +51,9 @@ const QuestionList: React.FC = () => {
           }}
         />
       </S.TitleWrapper>
-      <QuestionFilters positionFilters={positionFilters} setPositionFilters={setPositionFilters} tagFilters={tagFilters} setTagFilters={setTagFilters} />
+      {!postQuestionModalOpen && (
+        <QuestionFilters positionFilters={positionFilters} setPositionFilters={setPositionFilters} tagFilters={tagFilters} setTagFilters={setTagFilters} />
+      )}
       {!postQuestionModalOpen && (
         <S.QuestionWrapper>
           {filteredQuestions.map((question) => (

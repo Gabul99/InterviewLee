@@ -8,9 +8,9 @@ interface Props {
   setTagFilters: (value: string[]) => void;
 }
 
-const QuestionFilters = ({ positionFilters, setPositionFilters, tagFilters, setTagFilters }: Props) => {
-  const positionNames = ['Data Analyist', 'Back-end', 'Front-end'];
+export const positionNames = ['Data Analyist', 'Back-end', 'Front-end'];
 
+const QuestionFilters = ({ positionFilters, setPositionFilters, tagFilters, setTagFilters }: Props) => {
   const handlePositionFilter = (value: string) => {
     if (positionFilters.includes(value)) setPositionFilters(positionFilters.filter((p) => p !== value));
     else setPositionFilters([...positionFilters, value]);

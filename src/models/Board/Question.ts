@@ -9,4 +9,5 @@ export interface Question {
   // max rating : 5
   rating: number;
   tags: string[];
+  position: string | null;
 }

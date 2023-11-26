@@ -1,3 +1,4 @@
+import { positionNames } from '../Board/QuestionFilters';
 import * as S from './InterestSelector.style';
 
 interface Props {
@@ -6,8 +7,6 @@ interface Props {
 }
 
 const TagSelector = ({ selectedTags, setSelectedTags }: Props) => {
-  const tags = ['Frontend Developer', 'Backend Developer', 'Product Manager', 'UI/UX Designer'];
-
   const handleToggle = (value: string) => {
     console.log('Hi', value, selectedTags);
     if (selectedTags.includes(value)) setSelectedTags(selectedTags.filter((tag) => tag !== value));
@@ -16,9 +15,9 @@ const TagSelector = ({ selectedTags, setSelectedTags }: Props) => {
 
   return (
     <S.Container>
-      {tags.map((tag) => (
-        <S.Tag key={tag} className={selectedTags.includes(tag) ? 'selected' : ''} onClick={() => handleToggle(tag)}>
-          {tag}
+      {positionNames.map((name) => (
+        <S.Tag key={name} className={selectedTags.includes(name) ? 'selected' : ''} onClick={() => handleToggle(name)}>
+          {name}
         </S.Tag>
       ))}
     </S.Container>
