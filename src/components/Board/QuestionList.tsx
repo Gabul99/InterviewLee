@@ -1,4 +1,4 @@
-import { useEffect, useState } from 'react';
+import { useEffect, useMemo, useState } from 'react';
 import PrimaryButton from '../Common/Button/PrimaryButton';
 import QuestionContainer from './Question/Container';
 import * as S from './QuestionList.style';
@@ -6,12 +6,26 @@ import QuestionPost from './QuestionPost';
 import { getQuestions } from '../../repository/Question';
 import { Question } from '../../models/Board/Question';
 import { useAuthContext } from '../../context/Auth';
+import QuestionFilters from './QuestionFilters';
 
 const QuestionList: React.FC = () => {
   const { profile, setLoginModalOpen } = useAuthContext();
 
   const [questions, setQuestions] = useState<Question[]>([]);
   const [postQuestionModalOpen, setPostQuestionModalOpen] = useState(false);
+  const [positionFilters, setPositionFilters] = useState<string[]>([]);
+  const [tagFilters, setTagFilters] = useState<string[]>([]);
+
+  const filteredQuestions = useMemo(() => {
+    let result = questions;
+    if (tagFilters.length > 0) {
+      result = result.filter((q) => q.tags.some((element) => tagFilters.includes(element)));
+    }
+    if (positionFilters.length > 0) {
+      result = result.filter((q) => positionFilters.includes(q.position ?? ''));
+    }
+    return result;
+  }, [questions, tagFilters, positionFilters]);
 
   const handleClosePostModal = () => {
     setPostQuestionModalOpen(false);
@@ -37,14 +51,18 @@ const QuestionList: React.FC = () => {
           }}
         />
       </S.TitleWrapper>
-      {postQuestionModalOpen && <QuestionPost onClose={handleClosePostModal} />}
+      {!postQuestionModalOpen && (
+        <QuestionFilters positionFilters={positionFilters} setPositionFilters={setPositionFilters} tagFilters={tagFilters} setTagFilters={setTagFilters} />
+      )}
       {!postQuestionModalOpen && (
         <S.QuestionWrapper>
-          {questions.map((question) => (
+          {filteredQuestions.map((question) => (
             <QuestionContainer key={question.id} question={question} />
           ))}
         </S.QuestionWrapper>
       )}
+      {filteredQuestions.length === 0 && <S.EmptyText>There is no questions that fits filter condition!</S.EmptyText>}
+      {postQuestionModalOpen && <QuestionPost onClose={handleClosePostModal} />}
     </>
   );
 };

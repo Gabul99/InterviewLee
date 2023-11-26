@@ -103,7 +103,7 @@ export const TagListWrapper = styled.div`
 export const TagList = styled.div`
   display: flex;
   flex-direction: row;
-  gap: 40px;
+  gap: 12px;
 `;
 
 export const Tag = styled.div`
@@ -118,4 +118,24 @@ export const Tag = styled.div`
   border-radius: 12px;
   border: 1px solid var(--Indigo, #10316b);
   background: var(--Light-Blue, #f2f7ff);
+`;
+
+export const PositionTag = styled.div`
+  width: fit-content;
+  padding: 4px 12px;
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  align-items: center;
+  border-radius: 30px;
+  border: 1px solid rgba(0, 0, 0, 1);
+  font-size: 14px;
+  font-weight: 500;
+  color: rgba(0, 0, 0, 1);
+  cursor: pointer;
+
+  &.selected {
+    background-color: rgba(0, 0, 0, 1);
+    color: white;
+  }
 `;

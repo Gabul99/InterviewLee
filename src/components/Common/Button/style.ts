@@ -22,9 +22,8 @@ export const ButtonWrapper = styled.button<{ background: string }>`
 `;
 
 export const RatingButtonContainer = styled.div`
-  display: flex;
-  justify-content: flex-end;
-  align-items: center;
+  width: 70px;
+  height: 70px;
 
   cursor: pointer;
 `;
