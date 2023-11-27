@@ -55,7 +55,17 @@ const LoginModal = ({ onClose }: Props) => {
           <>
             <h1 className="title">Welcome to InterviewLee!</h1>
             <p className="sub-title">Only one step to make nice interview...</p>
-            <S.Input value={nameValue} placeholder="Type your name" onChange={(e) => setNameValue(e.target.value)} />
+            <S.Input
+              autoFocus
+              value={nameValue}
+              placeholder="Type your name"
+              onChange={(e) => setNameValue(e.target.value)}
+              onKeyDown={(e) => {
+                if (e.key === 'Enter') {
+                  handleLogin();
+                }
+              }}
+            />
             <div style={{ display: 'flex' }}>
               <S.Button
                 onClick={() => {

@@ -36,6 +36,11 @@ const QuestionList: React.FC = () => {
     getQuestions().then((data) => setQuestions(data ?? []));
   }, [postQuestionModalOpen]);
 
+  useEffect(() => {
+    if (!profile) return;
+    setPositionFilters(profile.prefer);
+  }, [profile]);
+
   return (
     <>
       <S.TitleWrapper>
