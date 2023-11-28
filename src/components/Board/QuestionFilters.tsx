@@ -1,5 +1,6 @@
+import { tagNames } from '../../api/data/tags';
 import * as S from './QuestionFilters.style';
-import { tagNames } from './QuestionPost';
+import { positionNames } from '../../api/data/positions';
 
 interface Props {
   positionFilters: string[];
@@ -7,8 +8,6 @@ interface Props {
   tagFilters: string[];
   setTagFilters: (value: string[]) => void;
 }
-
-export const positionNames = ['Data Analyist', 'Back-end', 'Front-end'];
 
 const QuestionFilters = ({ positionFilters, setPositionFilters, tagFilters, setTagFilters }: Props) => {
   const handlePositionFilter = (value: string) => {

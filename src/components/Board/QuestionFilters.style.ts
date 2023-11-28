@@ -1,4 +1,4 @@
-import styled from 'styled-components';
+import { styled } from 'styled-components';
 import { Colors } from '../../styles/colors';
 
 export const Container = styled.div`
@@ -20,6 +20,7 @@ export const Row = styled.div`
     min-width: 170px;
     font-size: 18px;
     font-weight: 500;
+    font-weight: bold;
   }
 `;
 
@@ -33,7 +34,7 @@ export const PositionFilterItem = styled.div`
   border-radius: 30px;
   border: 1px solid rgba(0, 0, 0, 1);
   font-size: 14px;
-  font-weight: 500;
+  font-weight: bold;
   color: rgba(0, 0, 0, 1);
   cursor: pointer;
 
@@ -45,9 +46,10 @@ export const PositionFilterItem = styled.div`
 
 export const TagFilterItem = styled.div`
   display: flex;
-  padding: 4px 8px;
   justify-content: center;
   align-items: center;
+  padding: 4px 8px;
+  height: 24px;
   cursor: pointer;
 
   width: fit-content;
@@ -57,6 +59,7 @@ export const TagFilterItem = styled.div`
   background: var(--Light-Blue, #f2f7ff);
   color: ${Colors.Secondary};
   font-size: 12px;
+  font-weight: bold;
 
   &.selected {
     background-color: ${Colors.Secondary};

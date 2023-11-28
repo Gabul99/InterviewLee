@@ -98,5 +98,6 @@ export const TagWrapper = styled.div`
   border: 1px solid var(--Indigo, #10316b);
   background: var(--Light-Blue, #f2f7ff);
   font-size: 12px;
+  font-weight: bold;
   color: ${Colors.Secondary};
 `;

@@ -1,6 +1,5 @@
-import { PropsWithChildren, SetStateAction, createContext, useContext, useRef, useState } from 'react';
+import { PropsWithChildren, createContext, useContext, useState } from 'react';
 import { User } from '../models/Common/User';
-import { mockProfile } from '../api/mocks/profile.mock';
 
 interface AuthContextProps {
   profile: User | null;

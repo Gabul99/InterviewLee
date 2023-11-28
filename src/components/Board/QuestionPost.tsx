@@ -8,7 +8,8 @@ import { useAuthContext } from '../../context/Auth';
 import { addQuestion } from '../../repository/Question';
 import { toast } from 'react-toastify';
 import LinkToast from '../Toast/LinkToast';
-import { positionNames } from './QuestionFilters';
+import { positionNames } from '../../api/data/positions';
+import { tagNames } from '../../api/data/tags';
 
 interface Props {
   onClose: () => void;
@@ -118,5 +119,3 @@ const QuestionPost: React.FC<Props> = (props) => {
 };
 
 export default QuestionPost;
-
-export const tagNames = ['Culture Fit', 'Technology', 'Ambition', 'Experience', 'Leadership'];

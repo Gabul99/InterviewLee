@@ -13,7 +13,11 @@ const UserProfile: React.FC = () => {
       {profile && (
         <S.ProfileContent>
           <h2 className="name">{profile.name}</h2>
-          <p className="user-id">{`User ID: ${profile.id}`}</p>
+          <S.PreferWrapper>
+            {profile.prefer.map((name) => (
+              <S.PositionFilterItem key={name}>{name}</S.PositionFilterItem>
+            ))}
+          </S.PreferWrapper>
           <S.ProfileActvities>
             <div className="row">
               <span>No. of Responses:</span>

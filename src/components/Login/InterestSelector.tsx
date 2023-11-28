@@ -1,4 +1,4 @@
-import { positionNames } from '../Board/QuestionFilters';
+import { positionNames } from '../../api/data/positions';
 import * as S from './InterestSelector.style';
 
 interface Props {
