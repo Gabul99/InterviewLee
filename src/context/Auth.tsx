@@ -14,7 +14,14 @@ const AuthContext = createContext<AuthContextProps>(null!);
 const AuthProvider: React.FC<PropsWithChildren> = (props) => {
   const { children } = props;
   const [isLoginModalOpen, setLoginModalOpen] = useState(false);
-  const [profile, setProfile] = useState<User | null>(null);
+  const [_profile, _setProfile] = useState<User | null>(null);
+
+  const profile = _profile ?? JSON.parse(localStorage.getItem('profile') ?? 'null');
+
+  const setProfile = (value: User | null) => {
+    localStorage.setItem('profile', JSON.stringify(value));
+    _setProfile(value);
+  };
 
   return (
     <AuthContext.Provider

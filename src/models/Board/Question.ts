@@ -1,7 +1,3 @@
-import { Tag } from '../Common/Tag';
-import { User } from '../Common/User';
-import { Answer } from './Answer';
-
 export interface Question {
   id: ID;
   authorId: ID;
@@ -10,4 +6,10 @@ export interface Question {
   rating: number;
   tags: string[];
   position: string | null;
+}
+
+// NOTE: 종속 구조를 만들 수 없어서 아래 형식으로 작업
+export interface Vote {
+  questionId: ID;
+  userId: ID;
 }

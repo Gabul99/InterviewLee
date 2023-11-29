@@ -66,6 +66,7 @@ export const QuestionContentWrapper = styled.div`
   }
 
   span {
+    font-size: 14px;
     color: rgba(0, 0, 0, 0.6);
   }
 `;
