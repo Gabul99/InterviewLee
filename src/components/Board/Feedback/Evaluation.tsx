@@ -6,15 +6,18 @@ import * as S from './Evaluation.style';
 import { AIReport } from '../../../models/AIReport';
 import { getAIReportsByAnswerId } from '../../../repository/AIReport';
 import { useAuthContext } from '../../../context/Auth';
+import ReportModal from './ReportModal';
 
 interface Props {
   answer: Answer;
 }
 
 const Evaluation: React.FC<Props> = ({ answer }: Props) => {
+  const { profile } = useAuthContext();
   const { push } = useRouter();
   const [report, setReport] = useState<AIReport>();
   const { selectedQuestionId, selectedAnswerId } = useQuestionContext();
+  const [isModalOpen, setModalOpen] = useState<boolean>(false);
 
   useEffect(() => {
     getAIReportsByAnswerId(answer.id).then((data) => setReport(data));
@@ -22,6 +25,11 @@ const Evaluation: React.FC<Props> = ({ answer }: Props) => {
 
   const navigateReport = () => {
     if (selectedQuestionId === null) return;
+
+    if (profile && profile.id !== answer.authorId) {
+      setModalOpen(true);
+      return;
+    }
 
     push('/report', { questionId: selectedQuestionId, answerId: selectedAnswerId });
   };
@@ -51,6 +59,7 @@ const Evaluation: React.FC<Props> = ({ answer }: Props) => {
         </S.Description>
         <S.Button onClick={navigateReport}>Go to Open AI’s Report!</S.Button>
       </S.Content>
+      {report && isModalOpen && <ReportModal report={report} onClose={() => setModalOpen(false)} />}
     </S.Container>
   );
 };

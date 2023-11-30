@@ -7,33 +7,6 @@ import { useAuthContext } from '../context/Auth';
 import { getAIReportsByUserId } from '../repository/AIReport';
 import { AIReport } from '../models/AIReport';
 
-const mockList = [
-  {
-    id: '1',
-    question: 'Why do you apply this company?',
-  },
-];
-
-const AIReportList: AIReport[] = [
-  {
-    id: '1',
-    /**
-     * Question 이랑 연결되는 포인트가 있어야 할 것 같아요, answer도 마찬가지로요
-     *
-     * 아래 첨부한 mockQuestions 를 참고해주세요 @gabul
-     * @see {mockQuestions}
-     * */
-    questionId: '0',
-    answerId: '0',
-    question: 'Why do you apply this company?',
-    answer: 'Gain money, what else.',
-    clarity: 70,
-    uniqueness: 50,
-    depth: 90,
-    follow_up: 45,
-  },
-];
-
 const Report: React.FC = () => {
   const [searchParams] = useSearchParams();
   const { profile } = useAuthContext();

@@ -25,6 +25,7 @@ export const Textarea = styled.textarea<{ confirmed: boolean }>`
   align-items: flex-start;
   gap: 16px;
   flex: 1 0 0;
+  cursor: text;
 
   border-radius: 8px;
   background: rgba(0, 0, 0, 0.04);

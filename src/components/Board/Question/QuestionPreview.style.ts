@@ -5,6 +5,8 @@ export const Container = styled.div`
   display: flex;
   flex-direction: row;
   gap: 10px;
+  height: 120px;
+  box-sizing: border-box;
 
   h2 {
     color: #0b409c;

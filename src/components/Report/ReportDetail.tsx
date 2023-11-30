@@ -9,9 +9,10 @@ import { useRouter } from '../../router/routing';
 
 interface Props {
   review: AIReport;
+  isOthers?: boolean;
 }
 
-const ReportDetail: React.FC<Props> = ({ review }: Props) => {
+const ReportDetail: React.FC<Props> = ({ review, isOthers }: Props) => {
   const [topReports, setTopReports] = useState<AIReport[]>([]);
   const [similarReport, setSimilarReport] = useState<AIReport | null>(null);
   const router = useRouter();
@@ -62,32 +63,34 @@ const ReportDetail: React.FC<Props> = ({ review }: Props) => {
           <DetailItem title="Follow-up" point={review.follow_up} advice={getFollowUpDetail(review.follow_up)} />
         </S.DetailArea>
       </S.PointArea>
-      <S.OtherAnswerContainer>
-        <h2 className="title">Top Answers</h2>
-        <div className="item-list">
-          {topReports.map((report) => {
-            return (
-              <S.OtherAnswerItem key={report.id} onClick={() => redirect(report)}>
-                <p className="point">
-                  Avg <span className={getColor(getReportAvg(report))}>{getReportAvg(report)}</span>
-                </p>
-                <div className="answer">{report.answer}</div>
-              </S.OtherAnswerItem>
-            );
-          })}
-          {topReports.length === 0 && <div className="empty-desc">There is no data from other users yet. Please wait!</div>}
-        </div>
-        <h2 className="title">Similar Rated Answers</h2>
-        {similarReport && (
-          <S.OtherAnswerItem onClick={() => redirect(similarReport)}>
-            <p className="point">
-              Avg <span className={getColor(getReportAvg(similarReport))}>{getReportAvg(similarReport)}</span>
-            </p>
-            <div className="answer">{similarReport.answer}</div>
-          </S.OtherAnswerItem>
-        )}
-        {similarReport === null && <div className="empty-desc">There is no data from other users yet. Please wait!</div>}
-      </S.OtherAnswerContainer>
+      {!isOthers && (
+        <S.OtherAnswerContainer>
+          <h2 className="title">Top Answers</h2>
+          <div className="item-list">
+            {topReports.map((report) => {
+              return (
+                <S.OtherAnswerItem key={report.id} onClick={() => redirect(report)}>
+                  <p className="point">
+                    Avg <span className={getColor(getReportAvg(report))}>{getReportAvg(report)}</span>
+                  </p>
+                  <div className="answer">{report.answer}</div>
+                </S.OtherAnswerItem>
+              );
+            })}
+            {topReports.length === 0 && <div className="empty-desc">There is no data from other users yet. Please wait!</div>}
+          </div>
+          <h2 className="title">Similar Rated Answers</h2>
+          {similarReport && (
+            <S.OtherAnswerItem onClick={() => redirect(similarReport)}>
+              <p className="point">
+                Avg <span className={getColor(getReportAvg(similarReport))}>{getReportAvg(similarReport)}</span>
+              </p>
+              <div className="answer">{similarReport.answer}</div>
+            </S.OtherAnswerItem>
+          )}
+          {similarReport === null && <div className="empty-desc">There is no data from other users yet. Please wait!</div>}
+        </S.OtherAnswerContainer>
+      )}
     </S.Container>
   );
 };

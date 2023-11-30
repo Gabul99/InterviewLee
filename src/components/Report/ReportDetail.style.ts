@@ -59,6 +59,7 @@ export const TotalPointContainer = styled.div`
   gap: 16px;
   background-color: ${Colors.White};
   padding: 16px;
+  border-radius: 16px;
 
   h2.title {
     font-weight: 700;
