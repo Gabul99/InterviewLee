@@ -16,25 +16,26 @@ export const Container = styled.div`
   }
 `;
 
-export const ImageWrapper = styled.div`
-  width: 111px;
-  height: 116px;
+export const PositionTag = styled.div`
   display: flex;
-  flex-direction: column;
+  flex-direction: row;
   align-items: center;
-  padding-top: 22px;
-  justify-content: space-between;
+  gap: 12px;
   flex-shrink: 0;
+  border-radius: 12px;
+  width: fit-content;
+  padding: 4px 8px;
+  border: 1px solid rgb(0, 0, 0);
 
   img {
-    width: 52px;
-    height: 52px;
+    width: 20px;
+    height: 20px;
   }
 
   .position-name {
-    font-size: 14px;
+    font-size: 12px;
     text-align: center;
-    font-weight: 500;
+    font-weight: 700;
   }
 `;
 

@@ -57,40 +57,26 @@ const QuestionWrapper: React.FC<QuestionWrapperProps> = ({ question, onClick, fo
 
   return (
     <S.Container onClick={(e) => onClick?.(e)}>
-      <S.ImageWrapper>
-        {question.position === 'Data Analyist' && (
-          <>
-            <img src={DataAnalyist} />
-            <div className="position-name">
-              DATA
-              <br />
-              ANALYST
-            </div>
-          </>
-        )}
-        {question.position === 'Back-end' && (
-          <>
-            <img src={Backend} />
-            <div className="position-name">
-              BACK
-              <br />
-              END
-            </div>
-          </>
-        )}
-        {question.position === 'Front-end' && (
-          <>
-            <img src={Frontend} />
-            <div className="position-name">
-              FRONT
-              <br />
-              END
-            </div>
-          </>
-        )}
-      </S.ImageWrapper>
       <S.QuestionContentWrapper>
         <S.TagContainer>
+          {question.position === 'Data Analyist' && (
+            <S.PositionTag>
+              <img src={DataAnalyist} />
+              <div className="position-name">Data Analyist</div>
+            </S.PositionTag>
+          )}
+          {question.position === 'Back-end' && (
+            <S.PositionTag>
+              <img src={Backend} />
+              <div className="position-name">Back-end</div>
+            </S.PositionTag>
+          )}
+          {question.position === 'Front-end' && (
+            <S.PositionTag>
+              <img src={Frontend} />
+              <div className="position-name">Front-end</div>
+            </S.PositionTag>
+          )}
           {tags.map((tag) => (
             <S.TagWrapper key={tag}>{`#${tag}`}</S.TagWrapper>
           ))}
