@@ -10,6 +10,7 @@ import { addAnswer } from '../../../repository/Answer';
 import { createAIReport } from '../../../repository/AIReport';
 import { toast } from 'react-toastify';
 import LinkToast from '../../Toast/LinkToast';
+import { addAnswerCount } from '../../../repository/Campus';
 
 interface Props {
   question: Question;
@@ -45,6 +46,7 @@ const AnswerInput: React.FC<Props> = (props) => {
     await addAnswer(newAnswer);
     setSelectedQuestionId(question.id);
     setSelectedAnswerId(newAnswer.id);
+    addAnswerCount(profile.campus);
     showToast();
     await createAIReport(profile.id, question, newAnswer);
     refresh();

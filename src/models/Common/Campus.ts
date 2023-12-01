@@ -1,9 +1,7 @@
 export interface Campus {
-  campus: string;
-  rank: number;
-  points: number;
-  total_user: number;
-  total_active: number;
-  question_no: number;
-  response_no: number;
+  name: string;
+  point: number;
+  questionCount: number;
+  answerCount: number;
+  userCount: number;
 }

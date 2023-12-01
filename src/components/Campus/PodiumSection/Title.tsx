@@ -15,10 +15,10 @@ const Title = () => {
   return (
     <S.TitleContainer>
       <S.Title>Campus</S.Title>
-      <S.HoverContainer>
-        <S.HoverDescription>TOP 3 for 4th Week of October!</S.HoverDescription>
-        <S.HoverIconWrapper onMouseEnter={handleMouseEnter} onMouseLeave={handleMouseLeave}>
-          <S.HoverIconContainer>
+      {/* <S.HoverContainer>
+        <S.HoverDescription>TOP 3 for Whole Life!</S.HoverDescription>
+        <S.HoverIconWrapper onMouseEnter={handleMouseEnter} onMouseLeave={handleMouseLeave}> */}
+      {/* <S.HoverIconContainer>
             <S.HoverIcon src={InfoIcon} />
             {isHovered && (
               <S.HoverPopUp>
@@ -33,9 +33,9 @@ const Title = () => {
                 </S.HoverPopUpText>
               </S.HoverPopUp>
             )}
-          </S.HoverIconContainer>
-        </S.HoverIconWrapper>
-      </S.HoverContainer>
+          </S.HoverIconContainer> */}
+      {/* </S.HoverIconWrapper>
+      </S.HoverContainer> */}
     </S.TitleContainer>
   );
 };

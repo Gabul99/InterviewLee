@@ -6,9 +6,10 @@ import { Campus } from '../../../models/Common/Campus';
 
 interface RankProps {
   campus_cur: Campus; // Pass the Campus object as a prop
+  rank: number;
 }
 
-const Rank: React.FC<RankProps> = ({ campus_cur }) => {
+const Rank: React.FC<RankProps> = ({ campus_cur, rank }) => {
   const [isHovered, setIsHovered] = useState(false);
   const handleMouseEnter = () => {
     setIsHovered(true);
@@ -37,13 +38,13 @@ const Rank: React.FC<RankProps> = ({ campus_cur }) => {
       <S.RankWrapper onMouseEnter={handleMouseEnter} onMouseLeave={handleMouseLeave}>
         <S.RankUnit style={rankStyles}>
           <S.RankNo>
-            <h1>{campus_cur.rank}</h1>
+            <h1>{rank}</h1>
           </S.RankNo>
           <S.CampusName>
-            <p>{campus_cur.campus}</p>
+            <p>{campus_cur.name}</p>
           </S.CampusName>
           <S.CampusScore>
-            <h1>{campus_cur.points}</h1>
+            <h1>{campus_cur.point}</h1>
           </S.CampusScore>
         </S.RankUnit>
       </S.RankWrapper>

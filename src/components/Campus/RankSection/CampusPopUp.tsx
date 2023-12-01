@@ -15,51 +15,52 @@ interface CampusPopUpProps {
 const CampusNames = [KAIST, MIT, SNU, university];
 
 const CampusPopUp: React.FC<CampusPopUpProps> = ({ campus, style }) => {
-  const logoIndex = campus.rank <= 3 ? campus.rank - 1 : CampusNames.indexOf(university);
+  const logoIndex = (() => {
+    switch (campus.name) {
+      case 'Korea Advanced Institute of Science and Technology':
+        return 0;
+      case 'Seoul National University':
+        return 2;
+      default:
+        return 4;
+    }
+  })();
   return (
     <S.CampusPopUp style={style}>
       <S.CampusPopUpLeft>
         <S.CampusLogoContainer>
-          <S.CampusLogo src={CampusNames[logoIndex]} alt={campus.campus} />
+          <S.CampusLogo src={CampusNames[logoIndex]} alt={campus.name} />
         </S.CampusLogoContainer>
         <S.CampusName>
-          <h1>{campus.campus}</h1>
+          <h1>{campus.name}</h1>
         </S.CampusName>
         <S.CampusPoints>
-          <h3>{campus.points} points</h3>
+          <h3>{campus.point} points</h3>
         </S.CampusPoints>
       </S.CampusPopUpLeft>
       <S.CampusPopUpRight>
         <S.PointCategoryRow>
           <S.PointCategoryDescription>
-            <p>No. of Total Users:</p>
+            <p>Number of Total Users:</p>
           </S.PointCategoryDescription>
           <S.PointCategory>
-            <p>{campus.total_user}</p>
+            <p>{campus.userCount}</p>
           </S.PointCategory>
         </S.PointCategoryRow>
         <S.PointCategoryRow>
           <S.PointCategoryDescription>
-            <p>No. of Active Users:</p>
+            <p>Number of Questions:</p>
           </S.PointCategoryDescription>
           <S.PointCategory>
-            <p>{campus.total_active} </p>
+            <p>{campus.questionCount}</p>
           </S.PointCategory>
         </S.PointCategoryRow>
         <S.PointCategoryRow>
           <S.PointCategoryDescription>
-            <p>No. of Questions:</p>
+            <p>Number of Answer:</p>
           </S.PointCategoryDescription>
           <S.PointCategory>
-            <p>{campus.question_no}</p>
-          </S.PointCategory>
-        </S.PointCategoryRow>
-        <S.PointCategoryRow>
-          <S.PointCategoryDescription>
-            <p>No. of Responses:</p>
-          </S.PointCategoryDescription>
-          <S.PointCategory>
-            <p>{campus.response_no} </p>
+            <p>{campus.answerCount} </p>
           </S.PointCategory>
         </S.PointCategoryRow>
       </S.CampusPopUpRight>

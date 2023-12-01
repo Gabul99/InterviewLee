@@ -6,18 +6,22 @@ export const CampusPopUp = styled.div`
   display: flex;
   flex-direction: row;
   align-items: center;
+  justify-content: center;
   background: url(${CampusPopUpBackground}) no-repeat;
   background-size: auto 100%;
   background-position: center;
-  gap: 150px;
   height: 300px;
+  gap: 24px;
+  width: 760px;
 `;
 
 export const CampusPopUpLeft = styled.div`
   display: flex;
   flex-direction: column;
+  align-items: center;
   gap: 15px;
-  margin-left: 150px;
+  width: 280px;
+  /* margin-left: 150px; */
 `;
 
 export const CampusLogoContainer = styled.div`

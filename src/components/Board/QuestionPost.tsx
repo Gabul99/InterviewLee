@@ -10,6 +10,7 @@ import { toast } from 'react-toastify';
 import LinkToast from '../Toast/LinkToast';
 import { positionNames } from '../../api/data/positions';
 import { tagNames } from '../../api/data/tags';
+import { addQuestionCount } from '../../repository/Campus';
 
 interface Props {
   onClose: () => void;
@@ -44,6 +45,7 @@ const QuestionPost: React.FC<Props> = (props) => {
       position: positionState,
     };
     addQuestion(newQuestion).then(() => {
+      addQuestionCount(profile.campus);
       showToast();
       onClose();
     });

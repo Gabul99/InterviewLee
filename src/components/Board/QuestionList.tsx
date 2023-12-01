@@ -66,7 +66,7 @@ const QuestionList: React.FC = () => {
           ))}
         </S.QuestionWrapper>
       )}
-      {filteredQuestions.length === 0 && <S.EmptyText>There is no questions that fits filter condition!</S.EmptyText>}
+      {!postQuestionModalOpen && filteredQuestions.length === 0 && <S.EmptyText>There is no questions that fits filter condition!</S.EmptyText>}
       {postQuestionModalOpen && <QuestionPost onClose={handleClosePostModal} />}
     </>
   );
