@@ -5,7 +5,7 @@ export interface Question {
   // max rating : 5
   rating: number;
   tags: string[];
-  position: string | null;
+  position: string[];
 }
 
 // NOTE: 종속 구조를 만들 수 없어서 아래 형식으로 작업

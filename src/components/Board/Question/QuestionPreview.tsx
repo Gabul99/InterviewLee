@@ -59,19 +59,19 @@ const QuestionWrapper: React.FC<QuestionWrapperProps> = ({ question, onClick, fo
     <S.Container onClick={(e) => onClick?.(e)}>
       <S.QuestionContentWrapper>
         <S.TagContainer>
-          {question.position === 'Data Analyist' && (
+          {question.position?.includes('Data Analyist') && (
             <S.PositionTag>
               <img src={DataAnalyist} />
               <div className="position-name">Data Analyist</div>
             </S.PositionTag>
           )}
-          {question.position === 'Back-end' && (
+          {question.position.includes('Back-end') && (
             <S.PositionTag>
               <img src={Backend} />
               <div className="position-name">Back-end</div>
             </S.PositionTag>
           )}
-          {question.position === 'Front-end' && (
+          {question.position.includes('Front-end') && (
             <S.PositionTag>
               <img src={Frontend} />
               <div className="position-name">Front-end</div>

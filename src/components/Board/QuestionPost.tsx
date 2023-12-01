@@ -22,7 +22,7 @@ const QuestionPost: React.FC<Props> = (props) => {
   const { profile } = useAuthContext();
 
   const [value, setValue] = useState('');
-  const [positionState, setPositionStates] = useState<string | null>(null);
+  const [positionState, setPositionStates] = useState<string[]>([]);
   const [tagStates, setTagStates] = useState<string[]>([]);
 
   const handleTagClick = (tagName: string) => {
@@ -78,10 +78,10 @@ const QuestionPost: React.FC<Props> = (props) => {
           {positionNames.map((name, index) => (
             <S.PositionTag
               key={index}
-              className={positionState === name ? 'selected' : ''}
+              className={positionState.includes(name) ? 'selected' : ''}
               onClick={() => {
-                if (positionState === name) setPositionStates(null);
-                else setPositionStates(name);
+                if (positionState.includes(name)) setPositionStates(positionState.filter((p) => p !== name));
+                else setPositionStates([...positionState, name]);
               }}
             >
               {name}

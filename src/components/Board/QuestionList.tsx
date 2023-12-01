@@ -22,7 +22,7 @@ const QuestionList: React.FC = () => {
       result = result.filter((q) => q.tags.some((element) => tagFilters.includes(element)));
     }
     if (positionFilters.length > 0) {
-      result = result.filter((q) => positionFilters.includes(q.position ?? ''));
+      result = result.filter((q) => q.position.some((p) => positionFilters.includes(p)));
     }
     return result;
   }, [questions, tagFilters, positionFilters]);
