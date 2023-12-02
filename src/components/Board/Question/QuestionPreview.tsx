@@ -86,7 +86,7 @@ const QuestionWrapper: React.FC<QuestionWrapperProps> = ({ question, onClick, fo
       </S.QuestionContentWrapper>
       {!focused && (
         <S.ButtonWrapper>
-          <RatingButton selected={userResponse} onClick={(e) => handleRatingClick(e)} />
+          {question.authorId !== profile?.id ? <RatingButton selected={userResponse} onClick={(e) => handleRatingClick(e)} /> : <div />}
           <PrimaryButton
             style={{ alignSelf: 'flex-end' }}
             label="Answer!"
