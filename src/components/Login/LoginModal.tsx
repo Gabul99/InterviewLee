@@ -6,6 +6,7 @@ import { useAuthContext } from '../../context/Auth';
 import { toast } from 'react-toastify';
 import TagSelector from './InterestSelector';
 import { v4 } from 'uuid';
+import { addUserCount } from '../../repository/Campus';
 
 interface Props {
   onClose: () => void;
@@ -44,6 +45,7 @@ const LoginModal = ({ onClose }: Props) => {
     };
     addUser(newUser).then(() => {
       setProfile(newUser);
+      addUserCount('Korea Advanced Institute of Science and Technology');
       onClose();
     });
   };
