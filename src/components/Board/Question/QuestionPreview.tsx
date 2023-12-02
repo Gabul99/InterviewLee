@@ -58,6 +58,7 @@ const QuestionWrapper: React.FC<QuestionWrapperProps> = ({ question, onClick, fo
   return (
     <S.Container onClick={(e) => onClick?.(e)}>
       <S.QuestionContentWrapper>
+<<<<<<< Updated upstream
         <S.TagContainer>
           {question.position?.includes('Data Analyist') && (
             <S.PositionTag>
@@ -81,6 +82,9 @@ const QuestionWrapper: React.FC<QuestionWrapperProps> = ({ question, onClick, fo
             <S.TagWrapper key={tag}>{`#${tag}`}</S.TagWrapper>
           ))}
         </S.TagContainer>
+=======
+        <S.TagContainer>{tags && tags.map((tag) => <S.TagWrapper key={tag}>{`#${tag}`}</S.TagWrapper>)}</S.TagContainer>
+>>>>>>> Stashed changes
         <div className="content">
           <p>{questionValue}</p>
           <QuestionResponse answers={answers} votes={votes} />

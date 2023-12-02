@@ -14,9 +14,7 @@ const SelectedQuestion: React.FC<QuestionWrapperProps> = ({ question, onClick }:
 
   return (
     <S.Container onClick={(e) => onClick?.(e)}>
-      {tags.map((tag) => (
-        <S.TagWrapper key={tag}>{`#${tag}`}</S.TagWrapper>
-      ))}
+      {tags && tags.map((tag) => <S.TagWrapper key={tag}>{`#${tag}`}</S.TagWrapper>)}
       <S.QuestionWrapper>
         <h2>Q:</h2>
         <S.QuestionDescriptionWrapper>
