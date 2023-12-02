@@ -1,9 +1,34 @@
 import * as S from './UserProfile.style';
 import TestImage from '../../../assets/profile.png';
 import { useAuthContext } from '../../../context/Auth';
+import { getQuestions } from '../../../repository/Question';
+import { useEffect, useState } from 'react';
+import { getAnswers } from '../../../repository/Answer';
 
 const UserProfile: React.FC = () => {
   const { profile } = useAuthContext();
+
+  const [questionCount, setQuestionCount] = useState<number>(0);
+  const [answerCount, setAnswerCount] = useState<number>(0);
+
+  const fetchData = async () => {
+    const questions = await getQuestions();
+    const answers = await getAnswers();
+
+    if (questions) {
+      const count = questions.filter((question) => question.authorId === profile?.id).length;
+      setQuestionCount(count);
+    }
+
+    if (answers) {
+      const count = answers.filter((answer) => answer.authorId === profile?.id).length;
+      setAnswerCount(count);
+    }
+  };
+
+  useEffect(() => {
+    fetchData();
+  }, []);
 
   return (
     <S.Container>
@@ -21,11 +46,11 @@ const UserProfile: React.FC = () => {
           <S.ProfileActvities>
             <div className="row">
               <span>No. of Responses:</span>
-              <span>{profile.question_no}</span>
+              <span>{questionCount}</span>
             </div>
             <div className="row">
               <span>No. of Questions:</span>
-              <span>{profile.response_no}</span>
+              <span>{answerCount}</span>
             </div>
           </S.ProfileActvities>
         </S.ProfileContent>

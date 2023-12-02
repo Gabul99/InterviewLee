@@ -1,7 +1,7 @@
 import { getDBData, setDBData } from '../firebase/Firebase';
 import { Question } from '../models/Board/Question';
 
-export const getQuestions = async () => {
+export const getQuestions = async (): Promise<Question[] | undefined> => {
   const data = await getDBData();
   return data.questions ?? undefined;
 };
